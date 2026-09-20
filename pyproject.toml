@@ -1,0 +1,22 @@
+[project]
+name = "gamegen"
+version = "0.1.0"
+description = "Gera jogos de texto interativos (bash, futuramente Windows e HTML) a partir dos grafos narrativos exportados do Miro."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jinja2>=3.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.uv]
+# Aplicação, não biblioteca: `uv run python -m gamegen ...`
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

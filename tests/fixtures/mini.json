@@ -1,0 +1,23 @@
+{
+  "schema": "narrative-flow/v1",
+  "game_title": "Mini",
+  "nodes": [
+    {"id": "n01", "type": "process", "text": "nome", "x": 0, "y": 0,
+     "narrative": "Olá, '{nome}' — aspas \"duplas\" e 'simples'.", "ask": {"var": "nome", "prompt": "Nome?"}},
+    {"id": "n02", "type": "process", "text": "x", "x": 0, "y": 1, "narrative": "", "ask": {"var": "x", "prompt": "x?"}},
+    {"id": "n03", "type": "decision", "text": "cond com senão", "x": 0, "y": 2},
+    {"id": "n04", "type": "process", "text": "um", "x": 0, "y": 3, "narrative": "UM $HOME `date` 100% \\n {nome}"},
+    {"id": "n05", "type": "process", "text": "outro", "x": 1, "y": 3, "narrative": "OUTRO"},
+    {"id": "n06", "type": "decision", "text": "cond sem senão", "x": 0, "y": 4},
+    {"id": "n07", "type": "process", "text": "fim um", "x": 0, "y": 5, "narrative": "FIM-UM"}
+  ],
+  "edges": [
+    {"from": "n01", "to": "n02"},
+    {"from": "n02", "to": "n03"},
+    {"from": "n03", "to": "n04", "when": {"x": "1"}},
+    {"from": "n03", "to": "n05"},
+    {"from": "n04", "to": "n06"},
+    {"from": "n05", "to": "n06"},
+    {"from": "n06", "to": "n07", "when": {"x": "1"}}
+  ]
+}

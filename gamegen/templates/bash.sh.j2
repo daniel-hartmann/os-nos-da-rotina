@@ -1,0 +1,251 @@
+#!/usr/bin/env bash
+# {{ title }}
+#
+# Gerado por gamegen a partir de {{ source }}. NÃO EDITE: regenere.
+# Compatível com bash 3.2+ (macOS). Uso: ./{{ script_name }} [--auto] [--seed N] [--debug]
+
+AUTO=0
+DEBUG=0
+NEXT=''
+CHOICE=0
+PICK=''
+
+usage() {
+  printf 'Uso: %s [--auto] [--seed N] [--debug]\n' "$0"
+  printf '  --auto     joga sozinho, escolhendo ao acaso (para testar o grafo)\n'
+  printf '  --seed N   semente do sorteio (reprodutível)\n'
+  printf '  --debug    mostra o id e o rótulo de design de cada nó\n'
+}
+
+while [ $# -gt 0 ]; do
+  case $1 in
+    --auto) AUTO=1 ;;
+    --debug) DEBUG=1 ;;
+    --seed) shift; RANDOM=${1:-0} ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
+  esac
+  shift
+done
+
+if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
+  BOLD=$(printf '\033[1m'); DIM=$(printf '\033[2m'); RESET=$(printf '\033[0m')
+else
+  BOLD=''; DIM=''; RESET=''
+fi
+
+trap 'printf "\n"; exit 130' INT
+
+# ---------------------------------------------------------------- runtime ---
+
+debug() { # $1 id, $2 tipo, $3 rótulo do design
+  [ "$DEBUG" = 1 ] && printf '%s[%s %s] %s%s\n' "$DIM" "$1" "$2" "$3" "$RESET"
+  return 0
+}
+
+say() { printf '\n%s\n' "$1"; }
+
+pending() { # $1 rótulo do design, $2 rascunho (opcional)
+  printf '\n%s[texto pendente] %s%s\n' "$DIM" "$1" "$RESET"
+  if [ -n "$2" ]; then printf '%s  rascunho: %s%s\n' "$DIM" "$2" "$RESET"; fi
+  return 0
+}
+
+INTERP_VARS='{{ interp_vars|join(" ") }}'
+
+interp() { # substitui {var} pelo valor de V_var
+  local s=$1 v val
+  for v in $INTERP_VARS; do
+    eval "val=\${V_$v:-}"
+    s=${s//"{$v}"/$val}
+  done
+  printf '%s' "$s"
+}
+
+ask_var() { # $1 variável, $2 pergunta, $3 padrão (opcional)
+  local ans
+  if [ "$AUTO" = 1 ]; then
+    ans=${3:-X}
+    printf '\n%s %s> %s%s\n' "$2" "$DIM" "$ans" "$RESET"
+  else
+    while :; do
+      printf '\n%s ' "$2"
+      if ! IFS= read -r ans; then printf '\n'; exit 0; fi
+      [ -z "$ans" ] && ans=$3
+      [ -n "$ans" ] && break
+    done
+  fi
+  set_var "$1" "$ans"
+}
+
+set_var() { printf -v "V_$1" '%s' "$2"; }
+
+menu() { # $1 pergunta; demais = opções. Resultado em CHOICE (1..n)
+  local prompt=$1 n i ans label
+  shift
+  n=$#
+  if [ "$AUTO" = 1 ]; then
+    CHOICE=$(( RANDOM % n + 1 ))
+    eval "label=\${$CHOICE}"
+    printf '\n%s%s%s\n  %s> %s%s\n' "$BOLD" "$prompt" "$RESET" "$DIM" "$label" "$RESET"
+    return
+  fi
+  printf '\n%s%s%s\n' "$BOLD" "$prompt" "$RESET"
+  i=1
+  for label in "$@"; do
+    printf '  %d) %s\n' "$i" "$label"
+    i=$(( i + 1 ))
+  done
+  while :; do
+    printf '> '
+    if ! IFS= read -r ans; then printf '\n'; exit 0; fi
+    case $ans in
+      q|Q|sair) exit 0 ;;
+      ''|*[!0-9]*) ;;
+      *) if [ "$ans" -ge 1 ] && [ "$ans" -le "$n" ]; then CHOICE=$ans; return; fi ;;
+    esac
+    printf 'Digite um número de 1 a %d (ou q para sair).\n' "$n"
+  done
+}
+
+pick_random() { CHOICE=$(( RANDOM % $1 + 1 )); } # $1 = número de opções
+
+pick_eligible() { # $@ = índices elegíveis; sorteia um e devolve em CHOICE
+  local n=$# idx
+  [ "$n" -gt 0 ] || return 1
+  idx=$(( RANDOM % n + 1 ))
+  eval "CHOICE=\${$idx}"
+}
+
+no_transition() { # $1 id
+  printf '\n%s[erro] nenhuma transição válida a partir de %s; encerrando.%s\n' "$DIM" "$1" "$RESET" >&2
+  NEXT=''
+}
+
+reset_state() {
+  local v
+  for v in{% for v in reset_vars %} {{ v }}{% endfor %}; do unset "$v"; done
+}
+
+go_back() { # $1 id de destino, $2 rótulo do destino
+  local ans
+  printf '\n%s↺ o fluxo volta para: %s%s\n' "$DIM" "$2" "$RESET"
+  if [ "$AUTO" = 1 ]; then NEXT=''; return; fi
+  printf 'Recomeçar? [s/N] '
+  if ! IFS= read -r ans; then printf '\n'; exit 0; fi
+  case $ans in
+    s|S|sim|Sim) reset_state; NEXT=$1 ;;
+    *) NEXT='' ;;
+  esac
+}
+
+run_from() { # executa nós a partir de $1 até não haver próximo
+  local cur
+  NEXT=$1
+  while [ -n "$NEXT" ]; do
+    cur=$NEXT
+    NEXT=''
+    "node_$cur"
+  done
+}
+
+enter_panel() { # $1 modo (choice|random), $2 pergunta; demais = pares id rótulo
+  local mode=$1 prompt=$2 id label seen
+  local ids=() labels=() all_ids=() all_labels=()
+  shift 2
+  while [ $# -gt 0 ]; do
+    id=$1; label=$2; shift 2
+    all_ids+=("$id"); all_labels+=("$label")
+    eval "seen=\${VIS_$id:-}"
+    if [ -z "$seen" ]; then ids+=("$id"); labels+=("$label"); fi
+  done
+  if [ ${#ids[@]} -eq 0 ]; then ids=("${all_ids[@]}"); labels=("${all_labels[@]}"); fi
+  if [ ${#ids[@]} -eq 1 ]; then
+    PICK=${ids[0]}
+  elif [ "$mode" = random ]; then
+    pick_random ${#ids[@]}
+    PICK=${ids[$(( CHOICE - 1 ))]}
+  else
+    menu "$prompt" "${labels[@]}"
+    PICK=${ids[$(( CHOICE - 1 ))]}
+  fi
+  printf -v "VIS_$PICK" '%s' 1
+  run_from "$PICK"
+}
+
+# ------------------------------------------------------------------ nós -----
+{% macro go(edge) -%}
+{% if edge.back %}go_back {{ edge.target|sh }} {{ nodes[edge.target].label|sh }}{% else %}NEXT={{ edge.target|sh }}{% endif %}
+{%- endmacro %}
+{% macro cond(when) -%}
+{% for k, v in when.items() %}[ "${V_{{ k }}:-}" = {{ v|sh }} ]{% if not loop.last %} && {% endif %}{% endfor %}
+{%- endmacro %}
+{% for n in nodes.values() %}
+
+node_{{ n.id }}() {
+  debug {{ n.id|sh }} {{ n.kind|sh }} {{ n.label|sh }}
+{% if n.narrative is none %}
+{% if n.kind == 'process' %}
+  pending {{ n.label|sh }} {{ n.draft|sh }}
+{% endif %}
+{% elif n.narrative %}
+  say {{ n.narrative|txt }}
+{% endif %}
+{% if n.ask %}
+  ask_var {{ n.ask.var|sh }} {{ n.ask.prompt|txt }} {{ n.ask.default|sh }}
+{% endif %}
+{% for k, v in n.set.items() %}
+  set_var {{ k|sh }} {{ v|sh }}
+{% endfor %}
+{% for p in n.calls %}
+  enter_panel {{ 'random' if n.mode == 'random' else 'choice' }} {{ (n.prompt or 'Qual caminho?')|txt }}{% for e in panels[p].entries %} {{ e|sh }} {{ nodes[e].menu_label|txt }}{% endfor %}
+
+{% endfor %}
+{% if not n.succ %}
+  NEXT=''
+{% elif n.mode == 'conditional' %}
+{% for e in n.succ if e.when %}
+  {{ 'if' if loop.first else 'elif' }} {{ cond(e.when) }}; then {{ go(e) }}
+{% endfor %}
+{% set fallback = n.succ|rejectattr('when')|list %}
+{% if n.succ|selectattr('when')|list %}
+  else {% if fallback %}{{ go(fallback[0]) }}{% else %}no_transition {{ n.id|sh }}{% endif %}
+
+  fi
+{% else %}
+  {{ go(fallback[0]) }}
+{% endif %}
+{% elif n.mode == 'random' and (n.succ|length > 1 or n.succ[0].when) %}
+  ELIG=''
+{% for e in n.succ %}
+{% if e.when %}
+  if {{ cond(e.when) }}; then ELIG="$ELIG {{ loop.index }}"; fi
+{% else %}
+  ELIG="$ELIG {{ loop.index }}"
+{% endif %}
+{% endfor %}
+  pick_eligible $ELIG || { no_transition {{ n.id|sh }}; return; }
+  case $CHOICE in
+{% for e in n.succ %}
+    {{ loop.index }}) {{ go(e) }} ;;
+{% endfor %}
+  esac
+{% elif n.succ|length == 1 %}
+  {{ go(n.succ[0]) }}
+{% else %}
+  menu {{ (n.prompt or default_prompt)|txt }}{% for e in n.succ %} {{ nodes[e.target].menu_label|txt }}{% endfor %}
+
+  case $CHOICE in
+{% for e in n.succ %}
+    {{ loop.index }}) {{ go(e) }} ;;
+{% endfor %}
+  esac
+{% endif %}
+}
+{% endfor %}
+
+# ----------------------------------------------------------------- início ---
+
+printf '\n%s%s%s\n' "$BOLD" {{ title|sh }} "$RESET"
+run_from {{ start|sh }}
+printf '\n%s— Fim —%s\n' "$DIM" "$RESET"

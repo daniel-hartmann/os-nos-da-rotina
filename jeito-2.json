@@ -1,0 +1,906 @@
+{
+  "schema": "narrative-flow/v1",
+  "source": {
+    "tool": "miro",
+    "board": "Jogo Narrativas Interativas",
+    "extracted": "2026-09-20"
+  },
+  "variant": 2,
+  "title": "Jeito 2: 3 ou 4 pontos de interação",
+  "format_notes": {
+    "node_types": {
+      "process": "bloco de fluxo (passo de narrativa, opção do jogador ou resultado)",
+      "decision": "losango de decisão/sorteio",
+      "panel": "quadro branco que agrupa um subfluxo; os nós dentro dele têm o campo 'inside' apontando para o id do quadro"
+    },
+    "edges": "arestas direcionadas from -> to; inferred=true quando a origem foi deduzida pela geometria (a API do Miro não devolveu o ponto de partida do conector)",
+    "coords": "x,y = centro do nó no canvas do Miro (y cresce para baixo); úteis para ordenar o fluxo de cima para baixo",
+    "not_captured": "cores dos blocos e rótulos nas setas (não há rótulos nos conectores; as opções são nós)"
+  },
+  "nodes": [
+    {
+      "id": "n01",
+      "type": "process",
+      "text": "Introdução ao personagem",
+      "x": 9378,
+      "y": -2194,
+      "narrative": "Por\nAngelo\nDaniel\nLuis\n\nData: Setembro, 2026",
+      "ask": {
+        "var": "nome",
+        "prompt": "Digite seu nome:",
+        "default": "X"
+      }
+    },
+    {
+      "id": "n02",
+      "type": "process",
+      "text": "Na manhã do dia seguinte",
+      "x": 9378,
+      "y": -1991,
+      "narrative": "NA EMPRESA\n\nNa manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, {nome} chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho."
+    },
+    {
+      "id": "n03",
+      "type": "process",
+      "text": "Começar a dirigir o onibus",
+      "x": 9378,
+      "y": -1788,
+      "narrative": "DENTRO DO ONIBUS"
+    },
+    {
+      "id": "n04",
+      "type": "process",
+      "text": "Lembrança B (Curso e Pessoa Atraente)",
+      "x": 11224,
+      "y": -1624,
+      "inside": "n19",
+      "narrative": "ESCRITÓRIO DA EMPRESA DE ÔNIBUS, CURSO PREPARATÓRIO"
+    },
+    {
+      "id": "n05",
+      "type": "decision",
+      "text": "LB",
+      "x": 9378,
+      "y": -1572
+    },
+    {
+      "id": "n06",
+      "type": "process",
+      "text": "Introdução LB",
+      "x": 11224,
+      "y": -1421,
+      "inside": "n19",
+      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando."
+    },
+    {
+      "id": "n07",
+      "type": "process",
+      "text": "Entram NPCs. Viagem segue.",
+      "x": 9378,
+      "y": -1356,
+      "draft": "Parada 1: pessoas aleatórias"
+    },
+    {
+      "id": "n08",
+      "type": "process",
+      "text": "Entra(m) personagem(ns) referente a LB",
+      "x": 9378,
+      "y": -1138
+    },
+    {
+      "id": "n09",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 11224,
+      "y": -1172,
+      "inside": "n19"
+    },
+    {
+      "id": "n10",
+      "type": "process",
+      "text": "Oi simpático",
+      "x": 11064,
+      "y": -947,
+      "inside": "n19",
+      "choice": "Dar um oi simpático.",
+      "narrative": ""
+    },
+    {
+      "id": "n11",
+      "type": "process",
+      "text": "Cantada",
+      "x": 11224,
+      "y": -947,
+      "inside": "n19",
+      "choice": "Dar uma cantada.",
+      "narrative": ""
+    },
+    {
+      "id": "n12",
+      "type": "process",
+      "text": "Indiferença",
+      "x": 11384,
+      "y": -947,
+      "inside": "n19",
+      "choice": "Finge indiferença e presta atenção na aula.",
+      "narrative": ""
+    },
+    {
+      "id": "n13",
+      "type": "decision",
+      "text": "LB",
+      "x": 9379,
+      "y": -885,
+      "mode": "random"
+    },
+    {
+      "id": "n14",
+      "type": "process",
+      "text": "Senta comigo?",
+      "x": 10913,
+      "y": -745,
+      "inside": "n19",
+      "narrative": "Daniela te chama pra sentar do lado dela."
+    },
+    {
+      "id": "n15",
+      "type": "process",
+      "text": "PA fica puta",
+      "x": 11224,
+      "y": -745,
+      "inside": "n19",
+      "narrative": "Daniela fica puta e faz escândalo na sala de aula."
+    },
+    {
+      "id": "n16",
+      "type": "process",
+      "text": "Presta atenção no curso e não dá bola",
+      "x": 11536,
+      "y": -745,
+      "inside": "n19",
+      "narrative": "Você completa o curso"
+    },
+    {
+      "id": "n17",
+      "type": "process",
+      "text": "Cadeirante",
+      "x": 9141,
+      "y": -684,
+      "set": {
+        "met_cadeirante": "1"
+      },
+      "draft": "Parada 3: cadeirante\nVocê pára o ônibus e:"
+    },
+    {
+      "id": "n18",
+      "type": "process",
+      "text": "Pessoa Atraente",
+      "x": 9616,
+      "y": -684,
+      "set": {
+        "met_pa": "1"
+      },
+      "draft": "Parada 4: pessoa atraente"
+    },
+    {
+      "id": "n19",
+      "type": "panel",
+      "text": "Lembrança",
+      "x": 11237,
+      "y": -717
+    },
+    {
+      "id": "n20",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 10913,
+      "y": -542,
+      "inside": "n19"
+    },
+    {
+      "id": "n21",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 11224,
+      "y": -542,
+      "inside": "n19"
+    },
+    {
+      "id": "n22",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 9141,
+      "y": -446
+    },
+    {
+      "id": "n23",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 9621,
+      "y": -446
+    },
+    {
+      "id": "n24",
+      "type": "process",
+      "text": "Bora",
+      "x": 10753,
+      "y": -363,
+      "inside": "n19",
+      "choice": "Aceitar.",
+      "narrative": ""
+    },
+    {
+      "id": "n25",
+      "type": "process",
+      "text": "Prestar atenção na aula",
+      "x": 10913,
+      "y": -363,
+      "inside": "n19",
+      "choice": "Prestar atenção na aula. Eu falo com ela depois.",
+      "narrative": ""
+    },
+    {
+      "id": "n26",
+      "type": "process",
+      "text": "Pede desculpa",
+      "x": 11144,
+      "y": -363,
+      "inside": "n19",
+      "choice": "Pedir desculpa e voltar a prestar atenção na aula",
+      "narrative": ""
+    },
+    {
+      "id": "n27",
+      "type": "process",
+      "text": "A culpa é sua",
+      "x": 11304,
+      "y": -363,
+      "inside": "n19",
+      "choice": "Fazer um escândalo e dizer que é culpa dela que deu moral.",
+      "narrative": ""
+    },
+    {
+      "id": "n28",
+      "type": "process",
+      "text": "LBA: 0",
+      "x": 9041,
+      "y": -208,
+      "draft": "LB2. consequência física ou demora demais"
+    },
+    {
+      "id": "n29",
+      "type": "process",
+      "text": "LBA: 1",
+      "x": 9241,
+      "y": -208,
+      "draft": "LB1. cadeirante"
+    },
+    {
+      "id": "n30",
+      "type": "process",
+      "text": "LBB: 0",
+      "x": 9515,
+      "y": -208,
+      "draft": "Se LB2, a pessoa atraente te xinga."
+    },
+    {
+      "id": "n31",
+      "type": "process",
+      "text": "LBB: 1",
+      "x": 9716,
+      "y": -208,
+      "draft": "Se LB1, a pessoa atraente é simpática."
+    },
+    {
+      "id": "n32",
+      "type": "process",
+      "text": "Conversa aula inteira",
+      "x": 10753,
+      "y": -183,
+      "inside": "n19",
+      "narrative": "Você e Pessoa Atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor a primeira vista."
+    },
+    {
+      "id": "n33",
+      "type": "process",
+      "text": "Perde de vista, presta atenção",
+      "x": 10913,
+      "y": -183,
+      "inside": "n19",
+      "narrative": "Você presta atenção no curso para evitar agitar a aula, e quando percebe, Daniela saiu da sala. Você a perde de vista."
+    },
+    {
+      "id": "n34",
+      "type": "process",
+      "text": "Presta atenção na aula",
+      "x": 11144,
+      "y": -183,
+      "inside": "n19",
+      "narrative": "Você fica mal visto com Daniela e termina o curso."
+    },
+    {
+      "id": "n35",
+      "type": "process",
+      "text": "É expulso da sala de aula",
+      "x": 11304,
+      "y": -183,
+      "inside": "n19",
+      "narrative": "Você é expulso do curso."
+    },
+    {
+      "id": "n36",
+      "type": "process",
+      "text": "Passageiros sentam. Viagem segue.",
+      "x": 9378,
+      "y": 126
+    },
+    {
+      "id": "n37",
+      "type": "process",
+      "text": "Não sabe usar elevador, tem atração LBA: 0 LBB: 1",
+      "x": 10984,
+      "y": 170,
+      "inside": "n19",
+      "narrative": "",
+      "set": {
+        "elevador": "nao",
+        "atracao": "sim"
+      }
+    },
+    {
+      "id": "n38",
+      "type": "process",
+      "text": "Sabe usar elevador, tem atração LBA: 1 LBB: 0",
+      "x": 11144,
+      "y": 170,
+      "inside": "n19",
+      "narrative": "",
+      "set": {
+        "elevador": "sim",
+        "atracao": "sim"
+      }
+    },
+    {
+      "id": "n39",
+      "type": "process",
+      "text": "Não sabe usar elevador, não tem atração LBA: 0 LBB: 0",
+      "x": 11304,
+      "y": 170,
+      "inside": "n19",
+      "narrative": "",
+      "set": {
+        "elevador": "nao",
+        "atracao": "nao"
+      }
+    },
+    {
+      "id": "n40",
+      "type": "process",
+      "text": "Sabe usar elevador, não tem atração LBA: 1 LBB: 0",
+      "x": 11464,
+      "y": 170,
+      "inside": "n19",
+      "narrative": "",
+      "set": {
+        "elevador": "sim",
+        "atracao": "nao"
+      }
+    },
+    {
+      "id": "n41",
+      "type": "decision",
+      "text": "Algum trigger de interação?",
+      "x": 9378,
+      "y": 412
+    },
+    {
+      "id": "n42",
+      "type": "process",
+      "text": "Fim Lembrança A",
+      "x": 11224,
+      "y": 375,
+      "inside": "n19",
+      "narrative": ""
+    },
+    {
+      "id": "n43",
+      "type": "process",
+      "text": "Ação imperdoável. Fim de jogo.",
+      "x": 8904,
+      "y": 623,
+      "draft": "PB1. Pára e não desce. Alguma criança tenta ajudar e morre. Fim do dia. [Vai para o início]"
+    },
+    {
+      "id": "n44",
+      "type": "process",
+      "text": "Todos te amam. Viagem segue.",
+      "x": 9378,
+      "y": 623
+    },
+    {
+      "id": "n45",
+      "type": "process",
+      "text": "Viagem segue. Passageiros incomodados.",
+      "x": 9853,
+      "y": 623,
+      "draft": "PB2. Não pára. Alguém no ônibus te odeia."
+    },
+    {
+      "id": "n46",
+      "type": "process",
+      "text": "Entram NPCs. Viagem segue.",
+      "x": 9378,
+      "y": 1145
+    },
+    {
+      "id": "n47",
+      "type": "process",
+      "text": "Entra passageiro final",
+      "x": 9378,
+      "y": 1372
+    },
+    {
+      "id": "n48",
+      "type": "decision",
+      "text": "Personagem final",
+      "x": 9378,
+      "y": 1604,
+      "mode": "random"
+    },
+    {
+      "id": "n49",
+      "type": "process",
+      "text": "Cadeirante",
+      "x": 9141,
+      "y": 1984,
+      "set": {
+        "met_cadeirante": "1"
+      }
+    },
+    {
+      "id": "n50",
+      "type": "process",
+      "text": "Pessoa Atraente",
+      "x": 9616,
+      "y": 1984,
+      "set": {
+        "met_pa": "1"
+      }
+    },
+    {
+      "id": "n51",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 9141,
+      "y": 2222
+    },
+    {
+      "id": "n52",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 9621,
+      "y": 2222
+    },
+    {
+      "id": "n53",
+      "type": "process",
+      "text": "LBA: 0",
+      "x": 9041,
+      "y": 2460,
+      "draft": "LB2. consequência física ou demora demais"
+    },
+    {
+      "id": "n54",
+      "type": "process",
+      "text": "LBA: 1",
+      "x": 9241,
+      "y": 2460,
+      "draft": "LB1. cadeirante"
+    },
+    {
+      "id": "n55",
+      "type": "process",
+      "text": "LBB: 0",
+      "x": 9515,
+      "y": 2460,
+      "draft": "Se LB2, a pessoa atraente te xinga."
+    },
+    {
+      "id": "n56",
+      "type": "process",
+      "text": "LBB: 1",
+      "x": 9716,
+      "y": 2460,
+      "draft": "Se LB1, a pessoa atraente é simpática."
+    },
+    {
+      "id": "n57",
+      "type": "process",
+      "text": "Passageiros sentam. Viagem segue.",
+      "x": 9378,
+      "y": 2696
+    },
+    {
+      "id": "n58",
+      "type": "decision",
+      "text": "Algum trigger de interação?",
+      "x": 9378,
+      "y": 2923
+    },
+    {
+      "id": "n59",
+      "type": "process",
+      "text": "Ação imperdoável. Fim de jogo.",
+      "x": 8904,
+      "y": 3134
+    },
+    {
+      "id": "n60",
+      "type": "process",
+      "text": "Todos te amam. Good ending.",
+      "x": 9378,
+      "y": 3134
+    }
+  ],
+  "edges": [
+    {
+      "from": "n58",
+      "to": "n60"
+    },
+    {
+      "from": "n58",
+      "to": "n59"
+    },
+    {
+      "from": "n57",
+      "to": "n58",
+      "inferred": true
+    },
+    {
+      "from": "n56",
+      "to": "n57"
+    },
+    {
+      "from": "n55",
+      "to": "n57"
+    },
+    {
+      "from": "n50",
+      "to": "n52",
+      "inferred": true
+    },
+    {
+      "from": "n52",
+      "to": "n56",
+      "when": {
+        "atracao": "sim"
+      }
+    },
+    {
+      "from": "n52",
+      "to": "n55",
+      "when": {
+        "atracao": "nao"
+      }
+    },
+    {
+      "from": "n54",
+      "to": "n57"
+    },
+    {
+      "from": "n53",
+      "to": "n57"
+    },
+    {
+      "from": "n49",
+      "to": "n51",
+      "inferred": true
+    },
+    {
+      "from": "n51",
+      "to": "n54",
+      "when": {
+        "elevador": "sim"
+      }
+    },
+    {
+      "from": "n51",
+      "to": "n53",
+      "when": {
+        "elevador": "nao"
+      }
+    },
+    {
+      "from": "n47",
+      "to": "n48",
+      "inferred": true
+    },
+    {
+      "from": "n48",
+      "to": "n50",
+      "when": {
+        "met_pa": ""
+      }
+    },
+    {
+      "from": "n48",
+      "to": "n49",
+      "when": {
+        "met_cadeirante": ""
+      }
+    },
+    {
+      "from": "n46",
+      "to": "n47"
+    },
+    {
+      "from": "n45",
+      "to": "n46"
+    },
+    {
+      "from": "n44",
+      "to": "n46"
+    },
+    {
+      "from": "n41",
+      "to": "n45"
+    },
+    {
+      "from": "n41",
+      "to": "n44"
+    },
+    {
+      "from": "n41",
+      "to": "n43"
+    },
+    {
+      "from": "n36",
+      "to": "n41"
+    },
+    {
+      "from": "n31",
+      "to": "n36"
+    },
+    {
+      "from": "n30",
+      "to": "n36"
+    },
+    {
+      "from": "n18",
+      "to": "n23",
+      "inferred": true
+    },
+    {
+      "from": "n23",
+      "to": "n31",
+      "when": {
+        "atracao": "sim"
+      }
+    },
+    {
+      "from": "n23",
+      "to": "n30",
+      "when": {
+        "atracao": "nao"
+      }
+    },
+    {
+      "from": "n29",
+      "to": "n36"
+    },
+    {
+      "from": "n28",
+      "to": "n36"
+    },
+    {
+      "from": "n17",
+      "to": "n22",
+      "inferred": true
+    },
+    {
+      "from": "n22",
+      "to": "n29",
+      "when": {
+        "elevador": "sim"
+      }
+    },
+    {
+      "from": "n22",
+      "to": "n28",
+      "when": {
+        "elevador": "nao"
+      }
+    },
+    {
+      "from": "n13",
+      "to": "n18"
+    },
+    {
+      "from": "n13",
+      "to": "n17"
+    },
+    {
+      "from": "n08",
+      "to": "n13"
+    },
+    {
+      "from": "n07",
+      "to": "n08"
+    },
+    {
+      "from": "n05",
+      "to": "n07"
+    },
+    {
+      "from": "n03",
+      "to": "n05"
+    },
+    {
+      "from": "n40",
+      "to": "n42"
+    },
+    {
+      "from": "n39",
+      "to": "n42"
+    },
+    {
+      "from": "n38",
+      "to": "n42"
+    },
+    {
+      "from": "n37",
+      "to": "n42"
+    },
+    {
+      "from": "n16",
+      "to": "n40"
+    },
+    {
+      "from": "n35",
+      "to": "n39"
+    },
+    {
+      "from": "n34",
+      "to": "n40"
+    },
+    {
+      "from": "n27",
+      "to": "n35"
+    },
+    {
+      "from": "n26",
+      "to": "n34"
+    },
+    {
+      "from": "n21",
+      "to": "n27"
+    },
+    {
+      "from": "n21",
+      "to": "n26"
+    },
+    {
+      "from": "n15",
+      "to": "n21"
+    },
+    {
+      "from": "n33",
+      "to": "n38"
+    },
+    {
+      "from": "n32",
+      "to": "n37"
+    },
+    {
+      "from": "n25",
+      "to": "n33"
+    },
+    {
+      "from": "n24",
+      "to": "n32"
+    },
+    {
+      "from": "n20",
+      "to": "n25"
+    },
+    {
+      "from": "n20",
+      "to": "n24"
+    },
+    {
+      "from": "n14",
+      "to": "n20"
+    },
+    {
+      "from": "n12",
+      "to": "n16"
+    },
+    {
+      "from": "n11",
+      "to": "n15"
+    },
+    {
+      "from": "n10",
+      "to": "n14"
+    },
+    {
+      "from": "n09",
+      "to": "n12"
+    },
+    {
+      "from": "n09",
+      "to": "n10"
+    },
+    {
+      "from": "n09",
+      "to": "n11"
+    },
+    {
+      "from": "n06",
+      "to": "n09",
+      "inferred": true
+    },
+    {
+      "from": "n04",
+      "to": "n06"
+    },
+    {
+      "from": "n60",
+      "to": "n02"
+    },
+    {
+      "from": "n59",
+      "to": "n02"
+    },
+    {
+      "from": "n43",
+      "to": "n02"
+    },
+    {
+      "from": "n02",
+      "to": "n03"
+    },
+    {
+      "from": "n01",
+      "to": "n02"
+    },
+    {
+      "from": "n19",
+      "to": "n05"
+    },
+    {
+      "from": "n05",
+      "to": "n19"
+    }
+  ],
+  "notes": [
+    {
+      "text": "eles escolhem lugares no onibus? talvez matamos esse passo?",
+      "x": 9572,
+      "y": 1094
+    },
+    {
+      "text": "eles escolhem lugares no onibus? talvez matamos esse passo?",
+      "x": 9584,
+      "y": -1426
+    }
+  ],
+  "game_title": "Os Nós da Rotina",
+  "unmapped_notes": [
+    {
+      "fonte": "documento de detalhes do jogo, Parada 3 (cadeirante)",
+      "texto": "Você pára o ônibus e: * Desce do onibus (LB1. cadeirante | LB2. consequência física ou demora demais) * PB1. Pára e não desce. Alguma criança tenta ajudar e morre. Fim do dia. [Vai para o início] * PB2. Não pára. Alguém no ônibus te odeia.",
+      "situacao": "O grafo não tem um nó com essas 3 opções para o jogador. As frases entraram como `draft` nos nós mais próximos: LBA: 0/1 (Desce do onibus), 'Ação imperdoável. Fim de jogo.' (PB1) e 'Viagem segue. Passageiros incomodados.' (PB2)."
+    },
+    {
+      "fonte": "documento de detalhes do jogo, Parada 4 (pessoa atraente)",
+      "texto": "Se LB2, a pessoa atraente te xinga. Se LB1, a pessoa atraente é simpática. Se PB2, ...",
+      "situacao": "A linha 'Se PB2, ...' está incompleta no documento. LB1/LB2 foram lidos como LBB: 1/0 (atração sim/não); isso é uma suposição."
+    },
+    {
+      "fonte": "documento de detalhes do jogo, marcador '[LEMBRANÇA 3]'",
+      "texto": "[LEMBRANÇA 3]",
+      "situacao": "Provavelmente [LEMBRANÇA B]; não foi usado."
+    }
+  ]
+}
