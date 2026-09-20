@@ -1,4 +1,4 @@
-"""Linha de comando: `uv run python -m gamegen ENTRADA.json [-t bash] [-o SAIDA]`."""
+"""Linha de comando: `uv run python -m gamegen ENTRADA.json... [-t bash|bat|html|all] [-o SAIDA]`."""
 
 from __future__ import annotations
 
@@ -6,11 +6,13 @@ import argparse
 import sys
 from pathlib import Path
 
-from .model import GameError, load, missing_texts
+from .model import Game, GameError, load, missing_texts
+from .output import write_target
+from .site import build_site
 from .targets import TARGETS
 
 
-def _report(game, verbose: bool) -> None:
+def _report(game: Game, verbose: bool) -> None:
     no_narr, no_choice = missing_texts(game)
     drafts = sum(1 for n in no_narr if n.draft)
     print(
@@ -28,31 +30,47 @@ def _report(game, verbose: bool) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="gamegen", description=__doc__)
-    ap.add_argument("input", type=Path, help="arquivo narrative-flow/v1 (ex.: jeito-1.json)")
-    ap.add_argument("-t", "--target", choices=sorted(TARGETS), default="bash")
-    ap.add_argument("-o", "--output", type=Path, help="arquivo de saída (padrão: dist/<entrada><ext>)")
+    ap.add_argument("inputs", type=Path, nargs="+", metavar="input", help="arquivos narrative-flow/v1 (ex.: jeito-1.json)")
+    ap.add_argument(
+        "-t", "--target", action="append", choices=[*sorted(TARGETS), "all"],
+        help="alvo(s) a gerar; repita para vários, ou use 'all' (padrão: bash)",
+    )
+    ap.add_argument("-o", "--output", type=Path, help="arquivo de saída (só com uma entrada e um alvo)")
+    ap.add_argument("--out-dir", type=Path, default=Path("dist"), help="pasta de saída (padrão: dist)")
+    ap.add_argument("--site", type=Path, metavar="DIR", help="gera o site estático (html + downloads + índice) em DIR")
     ap.add_argument("--start", help="id do nó inicial (padrão: o único nó sem entrada)")
-    ap.add_argument("--art-dir", type=Path, help="pasta das artes ASCII (padrão: arte/ ao lado da entrada)")
+    ap.add_argument("--art-dir", type=Path, help="pasta das artes ASCII (padrão: arte/ ao lado de cada entrada)")
     ap.add_argument("--check", action="store_true", help="só valida e lista textos pendentes; não gera")
     ap.add_argument("-v", "--verbose", action="store_true", help="lista cada texto pendente")
     args = ap.parse_args(argv)
 
-    try:
-        game = load(args.input, start=args.start, art_dir=args.art_dir)
-    except GameError as exc:
-        print(f"erro: {exc}", file=sys.stderr)
-        return 1
-    for w in game.warnings:
-        print(f"aviso: {w}", file=sys.stderr)
-    _report(game, args.verbose or args.check)
+    targets = args.target or ["bash"]
+    if "all" in targets:
+        targets = sorted(TARGETS)
+    if args.output and (len(args.inputs) > 1 or len(targets) > 1 or args.site):
+        ap.error("-o só vale com uma entrada e um alvo; use --out-dir")
+
+    games: list[tuple[Path, Game]] = []
+    for src in args.inputs:
+        try:
+            game = load(src, start=args.start, art_dir=args.art_dir)
+        except GameError as exc:
+            print(f"erro: {exc}", file=sys.stderr)
+            return 1
+        print(f"{src}:", file=sys.stderr)
+        for w in game.warnings:
+            print(f"  aviso: {w}", file=sys.stderr)
+        _report(game, args.verbose or args.check)
+        games.append((src, game))
     if args.check:
         return 0
 
-    target = TARGETS[args.target]
-    out = args.output or Path("dist") / (args.input.stem + target.EXTENSION)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(target.render(game, out.name), encoding="utf-8")
-    if target.EXECUTABLE:
-        out.chmod(0o755)
-    print(f"gerado {out}", file=sys.stderr)
+    if args.site:
+        for path in build_site(games, args.site):
+            print(f"gerado {path}", file=sys.stderr)
+        return 0
+    for src, game in games:
+        for name in targets:
+            out = args.output or args.out_dir / (src.stem + TARGETS[name].EXTENSION)
+            print(f"gerado {write_target(game, name, out)}", file=sys.stderr)
     return 0

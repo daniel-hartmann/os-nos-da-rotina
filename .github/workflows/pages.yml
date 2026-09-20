@@ -1,0 +1,53 @@
+# Gera o jogo "Os Nós da Rotina" (html + downloads .sh/.bat) e publica no GitHub Pages.
+#
+# Configuração única no GitHub: Settings > Pages > Build and deployment > Source: "GitHub Actions".
+name: Publicar jogo no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; um push novo cancela o que ainda não terminou.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      # Só publica se os grafos, os textos e os motores (bash e html) passarem nos testes.
+      - name: Testes
+        run: uv run --locked pytest -q
+
+      - name: Gerar o site
+        run: uv run --locked python -m gamegen --site _site jeito-1.json jeito-2.json
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

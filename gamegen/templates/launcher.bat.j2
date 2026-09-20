@@ -1,0 +1,16 @@
+@echo off
+rem Jogo de texto gerado por gamegen a partir de {{ source }}. NAO EDITE: regenere.
+rem Requer o Windows PowerShell, que ja vem no Windows. Uso: {{ script_name }} [--auto] [--no-pause] [--seed N] [--debug]
+chcp 65001 >nul
+set "GAME_ARGS=%*"
+powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$s=[IO.File]::ReadAllText('%~f0'); $i=$s.IndexOf('#'+'PS'+'#'); & ([ScriptBlock]::Create($s.Substring($i+4)))"
+set "RC=%ERRORLEVEL%"
+rem Aberto com duplo clique? Entao segura a janela ate a pessoa apertar uma tecla.
+echo %cmdcmdline% | find /i "%~f0" >nul
+if not errorlevel 1 pause
+exit /b %RC%
+#PS#
+$DataJson = @'
+{{ data_json }}
+'@
+{{ engine_ps1 }}

@@ -3,8 +3,10 @@
 Para adicionar um alvo (windows, html...), crie o módulo e registre-o aqui.
 """
 
-from . import bash
+from . import bash, bat, html
 
 TARGETS = {
     "bash": bash,
+    "bat": bat,
+    "html": html,
 }

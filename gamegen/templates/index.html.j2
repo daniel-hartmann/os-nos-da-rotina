@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ title }}: jogo de texto interativo.">
+<style>
+  :root { --bg: #14110f; --fg: #efe8dc; --dim: #9a8f80; --accent: #e8b04a; --card: #1d1915; --border: #3a332b; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f1e7; --fg: #241f19; --dim: #6f6454; --accent: #8a4f00; --card: #fffaf0; --border: #d8ccb6; }
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 19px/1.65 Georgia, "Times New Roman", serif; }
+  main { max-width: 44rem; margin: 0 auto; padding: 3rem 1rem 5rem; }
+  h1 { margin: 0 0 .5rem; font-size: 1.05rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  p.lead { margin: 0 0 2rem; color: var(--dim); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: .75rem; padding: 1.1rem 1.25rem; margin: 0 0 1rem; }
+  .card h2 { margin: 0 0 .75rem; font-size: 1.15rem; font-weight: 600; }
+  a.play { display: inline-block; padding: .6rem 1.1rem; border-radius: .5rem; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 600; }
+  a.play:hover, a.play:focus-visible { background: var(--accent); color: var(--bg); outline: none; }
+  .dl { margin: .9rem 0 0; font-size: .85em; color: var(--dim); }
+  .dl a { color: inherit; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+</style>
+</head>
+<body>
+<main>
+  <h1>{{ title }}</h1>
+  <p class="lead">Jogo de texto interativo. Escolha uma versão e jogue direto no navegador.</p>
+{% for c in cards %}
+  <section class="card">
+    <h2>{{ c.subtitle }}</h2>
+    <a class="play" href="{{ c.html }}">Jogar no navegador</a>
+    <p class="dl">
+      Ou baixe para jogar no terminal:
+      <a href="{{ c.bat }}" download>Windows (<code>.bat</code>)</a> ·
+      <a href="{{ c.sh }}" download>macOS/Linux (<code>.sh</code>)</a>
+      <br>No macOS/Linux, rode com <code>bash {{ c.sh }}</code>.
+    </p>
+  </section>
+{% endfor %}
+</main>
+</body>
+</html>

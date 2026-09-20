@@ -108,6 +108,7 @@ class Game:
     nodes: dict[str, Node]
     panels: dict[str, Panel]
     warnings: list[str] = field(default_factory=list)
+    subtitle: str = ""  # ex.: "Jeito 1: 5 ou 6 pontos de interação"
 
     def variables(self) -> list[str]:
         """Todas as variáveis de estado (`set`, `when`, `ask`), em ordem estável."""
@@ -314,7 +315,15 @@ def load(path: str | Path, start: str | None = None, art_dir: str | Path | None 
         raise GameError(f"textos usam {{{', '.join(unknown)}}}, mas nenhum nó define essas variáveis")
 
     title = raw.get("game_title") or raw.get("title") or path.stem
-    return Game(title=title, source=path.name, start=start, nodes=nodes, panels=panels, warnings=warnings)
+    return Game(
+        title=title,
+        source=path.name,
+        start=start,
+        nodes=nodes,
+        panels=panels,
+        warnings=warnings,
+        subtitle=raw.get("title", ""),
+    )
 
 
 def _mark_back_edges(nodes: dict[str, Node], panels: dict[str, Panel], start: str) -> None:
