@@ -1,4 +1,4 @@
-# Gera o jogo "Os Nós da Rotina" (html + downloads .sh/.bat) e publica no GitHub Pages.
+# Gera o jogo "Os Nós da Rotina" (html + download .sh) e publica no GitHub Pages.
 #
 # Configuração única no GitHub: Settings > Pages > Build and deployment > Source: "GitHub Actions".
 name: Publicar jogo no GitHub Pages

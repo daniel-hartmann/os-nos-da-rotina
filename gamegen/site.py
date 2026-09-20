@@ -20,16 +20,15 @@ _env = Environment(
 
 
 def build_site(games: list[tuple[Path, Game]], out_dir: Path) -> list[Path]:
-    """Gera <jogo>.html (jogar), <jogo>.sh e <jogo>.bat (baixar) e index.html. Links relativos."""
+    """Gera <jogo>.html (jogar), <jogo>.sh (baixar) e index.html. Links relativos."""
     written: list[Path] = []
     cards = []
     for src, game in games:
         stem = src.stem
         html = write_target(game, "html", out_dir / f"{stem}.html")
         sh = write_target(game, "bash", out_dir / f"{stem}.sh")
-        bat = write_target(game, "bat", out_dir / f"{stem}.bat")
-        written += [html, sh, bat]
-        cards.append({"subtitle": game.subtitle or stem, "html": html.name, "sh": sh.name, "bat": bat.name})
+        written += [html, sh]
+        cards.append({"subtitle": game.subtitle or stem, "html": html.name, "sh": sh.name})
     title = games[0][1].title
     index = out_dir / "index.html"
     index.write_text(_env.get_template("index.html.j2").render(title=title, cards=cards), encoding="utf-8")

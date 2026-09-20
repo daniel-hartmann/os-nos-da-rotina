@@ -16,6 +16,7 @@ from ..model import Game
 
 EXTENSION = ".bat"
 EXECUTABLE = False
+EXPERIMENTAL = True  # em andamento: fora de `-t all` e do site até ser validado no Windows
 NEWLINE = "\r\n"
 
 _PKG = Path(__file__).resolve().parent.parent

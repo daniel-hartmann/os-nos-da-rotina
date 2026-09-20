@@ -34,10 +34,9 @@
     <h2>{{ c.subtitle }}</h2>
     <a class="play" href="{{ c.html }}">Jogar no navegador</a>
     <p class="dl">
-      Ou baixe para jogar no terminal:
-      <a href="{{ c.bat }}" download>Windows (<code>.bat</code>)</a> ·
-      <a href="{{ c.sh }}" download>macOS/Linux (<code>.sh</code>)</a>
-      <br>No macOS/Linux, rode com <code>bash {{ c.sh }}</code>.
+      Ou baixe para jogar no terminal (macOS/Linux):
+      <a href="{{ c.sh }}" download>{{ c.sh }}</a>
+      <br>Rode com <code>bash {{ c.sh }}</code>.
     </p>
   </section>
 {% endfor %}

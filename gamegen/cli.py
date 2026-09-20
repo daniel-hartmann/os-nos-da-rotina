@@ -33,7 +33,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("inputs", type=Path, nargs="+", metavar="input", help="arquivos narrative-flow/v1 (ex.: jeito-1.json)")
     ap.add_argument(
         "-t", "--target", action="append", choices=[*sorted(TARGETS), "all"],
-        help="alvo(s) a gerar; repita para vários, ou use 'all' (padrão: bash)",
+        help="alvo(s) a gerar; repita para vários, ou use 'all' (padrão: bash; 'all' não inclui alvos experimentais como bat)",
     )
     ap.add_argument("-o", "--output", type=Path, help="arquivo de saída (só com uma entrada e um alvo)")
     ap.add_argument("--out-dir", type=Path, default=Path("dist"), help="pasta de saída (padrão: dist)")
@@ -46,7 +46,7 @@ def main(argv: list[str] | None = None) -> int:
 
     targets = args.target or ["bash"]
     if "all" in targets:
-        targets = sorted(TARGETS)
+        targets = sorted(n for n, t in TARGETS.items() if not getattr(t, "EXPERIMENTAL", False))
     if args.output and (len(args.inputs) > 1 or len(targets) > 1 or args.site):
         ap.error("-o só vale com uma entrada e um alvo; use --out-dir")
 
