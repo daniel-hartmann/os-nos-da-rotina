@@ -1,8 +1,8 @@
 # gamegen — Os Nós da Rotina
 
 Gera um jogo de texto interativo a partir do grafo narrativo (`jeito-1.json`, `jeito-2.json`),
-exportado do Miro. Hoje há um alvo, **bash**; Windows e HTML entram como novos módulos em
-`gamegen/targets/`.
+exportado do Miro. Alvos: **bash** e **html**. O alvo **bat** (Windows) está em andamento e fora do
+`-t all`, do site e do workflow. Novos alvos entram como módulos em `gamegen/targets/`.
 
 Dependências controladas por [uv](https://docs.astral.sh/uv/) (`pyproject.toml` + `uv.lock`).
 
@@ -12,6 +12,8 @@ Dependências controladas por [uv](https://docs.astral.sh/uv/) (`pyproject.toml`
 uv run python -m gamegen jeito-1.json            # gera dist/jeito-1.sh
 uv run python -m gamegen jeito-2.json -o jogo.sh
 uv run python -m gamegen jeito-1.json --check -v # só valida e lista os textos que faltam
+uv run python -m gamegen jeito-1.json jeito-2.json -t all   # bash + html em dist/
+uv run python -m gamegen --site _site jeito-1.json jeito-2.json   # site completo (o que o Pages publica)
 uv run pytest                                    # testes
 ```
 
@@ -92,3 +94,20 @@ script na hora de gerar, então o jogo continua sendo um único arquivo. Um nó 
 (`"narrative": ""`). Dicas: até 78 colunas (o gerador avisa se passar), só ASCII, indentação faz
 parte do desenho (linhas vazias no começo e no fim são ignoradas). Outra pasta: `--art-dir`.
 `arte/onibus.txt` é o exemplo atual.
+
+## HTML e GitHub Pages
+
+O alvo `html` gera um único arquivo (dados + motor JS + estilo). Enter/Espaço continuam, `1`-`9`
+escolhem, e as artes ASCII vão em `<pre class="art">`. Todo texto entra por `textContent`, então
+nomes digitados nunca viram HTML. Parâmetros úteis na URL: `?seed=7`, `?auto=1`, `?debug=1`.
+
+`.github/workflows/pages.yml` roda os testes, gera o site (`--site`) e publica no GitHub Pages a cada
+push em `main`. Configuração única: Settings > Pages > Source: **GitHub Actions**. O workflow fica na
+raiz deste projeto, então ele só roda se `trabalho-01` for a raiz do repositório.
+
+## Windows (.bat): pendente
+
+`gamegen/targets/bat.py` gera um `.bat` que embute um motor em PowerShell (`runtime/engine.ps1`).
+Foi executado com `pwsh` no Linux e passou nos testes manuais (jogo completo, entrada com caracteres
+especiais, menu, `q`, fim de entrada), mas **não** foi validado no Windows nem em escala (400 partidas).
+Gere com `-t bat`.
