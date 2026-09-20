@@ -148,4 +148,38 @@ def test_real_game_first_pages_are_separate_screens(tmp_path):
     text = [s for s in out.split(CLEAR) if s.strip()]
     assert "Digite seu nome" in text[0]
     assert text[1].startswith("NA EMPRESA") and "Ana chega" in text[1] and "DENTRO" not in text[1]
-    assert text[2].startswith("DENTRO DO ONIBUS")
+    assert "OS NOS DA ROTINA" in text[2] and "DENTRO DO ONIBUS" in text[2]  # ônibus em ASCII + texto
+    assert text[2].index("OS NOS DA ROTINA") < text[2].index("DENTRO DO ONIBUS")
+
+
+def test_art_is_shown_verbatim_above_the_text(tmp_path):
+    script = build(tmp_path, ROOT / "tests" / "fixtures" / "art.json")
+    r = play(script, "")
+    art = (ROOT / "tests" / "fixtures" / "arte" / "gato.txt").read_text(encoding="utf-8").rstrip("\n")
+    assert art in r.stdout  # barras, aspas, $HOME e crase saem literais
+    assert r.stdout.index(art) < r.stdout.index("COM ARTE") < r.stdout.index("SEM ARTE")
+    assert "uid=" not in r.stdout
+
+
+def test_art_stays_on_the_same_page_as_its_text(tmp_path):
+    script = build(tmp_path, ROOT / "tests" / "fixtures" / "art.json")
+    text = [s for s in play_tty(script, [""]).split(CLEAR) if s.strip()]
+    assert "( o.o )" in text[0] and "COM ARTE" in text[0] and "SEM ARTE" not in text[0]
+
+
+def test_missing_art_is_an_error(tmp_path):
+    doc = json.loads((ROOT / "tests" / "fixtures" / "art.json").read_text(encoding="utf-8"))
+    doc["nodes"][0]["art"] = "nao_existe"
+    bad = tmp_path / "bad.json"
+    bad.write_text(json.dumps(doc), encoding="utf-8")
+    with pytest.raises(GameError, match="nao_existe"):
+        load(bad)
+
+
+def test_wide_art_only_warns(tmp_path):
+    doc = json.loads((ROOT / "tests" / "fixtures" / "art.json").read_text(encoding="utf-8"))
+    doc["nodes"][0]["art"] = "larga"
+    src = tmp_path / "wide.json"
+    src.write_text(json.dumps(doc), encoding="utf-8")
+    game = load(src, art_dir=ROOT / "tests" / "fixtures" / "arte")
+    assert any("90 colunas" in w for w in game.warnings)

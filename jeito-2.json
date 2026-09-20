@@ -45,7 +45,8 @@
       "text": "Começar a dirigir o onibus",
       "x": 9378,
       "y": -1788,
-      "narrative": "DENTRO DO ONIBUS"
+      "narrative": "DENTRO DO ONIBUS",
+      "art": "onibus"
     },
     {
       "id": "n04",

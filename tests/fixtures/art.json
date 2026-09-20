@@ -1,0 +1,9 @@
+{
+  "schema": "narrative-flow/v1",
+  "game_title": "Arte",
+  "nodes": [
+    {"id": "n01", "type": "process", "text": "a", "x": 0, "y": 0, "narrative": "COM ARTE", "art": "gato"},
+    {"id": "n02", "type": "process", "text": "b", "x": 0, "y": 1, "narrative": "SEM ARTE"}
+  ],
+  "edges": [{"from": "n01", "to": "n02"}]
+}

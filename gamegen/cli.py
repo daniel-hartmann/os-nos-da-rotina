@@ -32,12 +32,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("-t", "--target", choices=sorted(TARGETS), default="bash")
     ap.add_argument("-o", "--output", type=Path, help="arquivo de saída (padrão: dist/<entrada><ext>)")
     ap.add_argument("--start", help="id do nó inicial (padrão: o único nó sem entrada)")
+    ap.add_argument("--art-dir", type=Path, help="pasta das artes ASCII (padrão: arte/ ao lado da entrada)")
     ap.add_argument("--check", action="store_true", help="só valida e lista textos pendentes; não gera")
     ap.add_argument("-v", "--verbose", action="store_true", help="lista cada texto pendente")
     args = ap.parse_args(argv)
 
     try:
-        game = load(args.input, start=args.start)
+        game = load(args.input, start=args.start, art_dir=args.art_dir)
     except GameError as exc:
         print(f"erro: {exc}", file=sys.stderr)
         return 1

@@ -77,6 +77,13 @@ before_input() { # menus e perguntas ficam na página do texto anterior; senão,
   FRESH=0
 }
 
+show_art() { # $1 arte (texto puro, exibido como está), $2 = same
+  if [ "$2" != same ] || [ "$PAGE_OPEN" = 0 ]; then new_page; fi
+  lead
+  printf '%s\n' "$1"
+  PAGE_OPEN=1; FRESH=0
+}
+
 say() { # $1 texto, $2 = same para continuar a página atual (se houver uma aberta)
   if [ "$2" != same ] || [ "$PAGE_OPEN" = 0 ]; then new_page; fi
   lead
@@ -231,13 +238,17 @@ enter_panel() { # $1 modo (choice|random), $2 pergunta; demais = pares id rótul
 
 node_{{ n.id }}() {
   debug {{ n.id|sh }} {{ n.kind|sh }} {{ n.label|sh }}
+{% if n.art %}
+  show_art {{ n.art|sh }}{% if n.page == 'same' %} same{% endif %}
+
+{% endif %}
 {% if n.narrative is none %}
 {% if n.kind == 'process' %}
-  pending {{ n.label|sh }} {{ n.draft|sh }}{% if n.page == 'same' %} same{% endif %}
+  pending {{ n.label|sh }} {{ n.draft|sh }}{% if n.page == 'same' or n.art %} same{% endif %}
 
 {% endif %}
 {% elif n.narrative %}
-  say {{ n.narrative|txt }}{% if n.page == 'same' %} same{% endif %}
+  say {{ n.narrative|txt }}{% if n.page == 'same' or n.art %} same{% endif %}
 
 {% endif %}
 {% if n.ask %}

@@ -46,6 +46,7 @@ Direto nos nós do JSON. Tudo é opcional; o que faltar aparece no jogo como
 | `narrative` | texto exibido ao entrar no nó. String ou lista de parágrafos. `""` = silencioso de propósito |
 | `choice`    | texto do nó quando ele aparece como opção de menu (padrão: rótulo do Miro)                  |
 | `prompt`    | pergunta do menu quando o nó ramifica (padrão: "O que você faz?")                           |
+| `art`       | nome de uma arte em `arte/<nome>.txt`, exibida antes do texto (veja Artes ASCII)             |
 | `page`      | `"new"` (padrão) abre página nova; `"same"` continua na página atual                        |
 | `draft`     | nota de design; só aparece junto do aviso de texto pendente                                 |
 | `set`       | `{"var": "valor"}` aplicado ao entrar no nó (estado do jogo)                                |
@@ -76,3 +77,18 @@ gamegen/cli.py             linha de comando
 tests/                     pytest (inclui rodar os scripts gerados)
 ```
 # os-nos-da-rotina
+
+## Artes ASCII
+
+A arte fica em arquivos de texto puro em `arte/<nome>.txt` (ao lado do JSON), sem escapes: `\`, aspas
+e `$` saem exatamente como no arquivo. O nó só a referencia:
+
+```json
+{"id": "n03", "art": "onibus", "narrative": "DENTRO DO ONIBUS"}
+```
+
+A arte aparece no topo da página do nó, seguida de uma linha em branco e do texto. É embutida no
+script na hora de gerar, então o jogo continua sendo um único arquivo. Um nó pode ter só a arte
+(`"narrative": ""`). Dicas: até 78 colunas (o gerador avisa se passar), só ASCII, indentação faz
+parte do desenho (linhas vazias no começo e no fim são ignoradas). Outra pasta: `--art-dir`.
+`arte/onibus.txt` é o exemplo atual.

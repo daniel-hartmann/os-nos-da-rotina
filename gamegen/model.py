@@ -15,6 +15,8 @@ Campos opcionais que os redatores podem adicionar aos nós do JSON:
     narrative  texto exibido ao entrar no nó (string, ou lista de parágrafos).
                Ausente = texto pendente (o jogo avisa); "" = nó silencioso de propósito.
                Aceita {var} para interpolar uma variável (ex.: {nome}).
+    art        nome de uma arte ASCII em `arte/<nome>.txt` (ao lado do JSON), exibida no topo
+               da página do nó, antes do texto. Texto puro: sem escapes, sem JSON.
     page       "new" (padrão): o texto abre uma página nova (espera Enter e limpa a tela);
                "same": continua na página atual, logo abaixo do texto anterior
     draft      rascunho/nota de design; aparece junto do aviso de texto pendente
@@ -46,6 +48,8 @@ from pathlib import Path
 
 SCHEMA = "narrative-flow/v1"
 ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
+ART_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
+MAX_ART_COLUMNS = 78
 VAR_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 PLACEHOLDER_RE = re.compile(r"\{([A-Za-z_][A-Za-z0-9_]*)\}")
 MODES = ("choice", "random", "conditional")
@@ -73,6 +77,7 @@ class Node:
     inside: str | None = None  # id do painel que contém o nó
     narrative: str | None = None  # None = pendente, "" = silencioso
     draft: str = ""
+    art: str = ""  # conteúdo da arte (já lido do arquivo)
     page: str = "new"
     choice: str = ""
     prompt: str = ""
@@ -169,8 +174,27 @@ def _ask(value: object, where: str) -> dict[str, str] | None:
     }
 
 
-def load(path: str | Path, start: str | None = None) -> Game:
+def _read_art(name: str, art_dir: Path, where: str, warnings: list[str]) -> str:
+    if not isinstance(name, str) or not ART_NAME_RE.match(name):
+        raise GameError(f"{where}: nome de arte inválido {name!r} (use letras, números, - e _)")
+    file = art_dir / f"{name}.txt"
+    try:
+        raw = file.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise GameError(f"{where}: arte {name!r} não encontrada em {file}") from exc
+    lines = [ln.expandtabs(4).rstrip() for ln in raw.splitlines()]
+    art = "\n".join(lines).strip("\n")  # só tira linhas vazias; a indentação é do desenho
+    if not art:
+        raise GameError(f"{where}: a arte {file} está vazia")
+    width = max(len(ln) for ln in art.split("\n"))
+    if width > MAX_ART_COLUMNS:
+        warnings.append(f"arte {name!r} tem {width} colunas (cabem {MAX_ART_COLUMNS} em terminal de 80)")
+    return art
+
+
+def load(path: str | Path, start: str | None = None, art_dir: str | Path | None = None) -> Game:
     path = Path(path)
+    art_dir = Path(art_dir) if art_dir else path.parent / "arte"
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -180,6 +204,7 @@ def load(path: str | Path, start: str | None = None) -> Game:
 
     nodes: dict[str, Node] = {}
     panels: dict[str, Panel] = {}
+    warnings: list[str] = []
     for rn in raw.get("nodes", []):
         nid = rn.get("id", "")
         if not ID_RE.match(nid):
@@ -207,6 +232,8 @@ def load(path: str | Path, start: str | None = None) -> Game:
             set=_vars(rn.get("set"), where),
             ask=_ask(rn.get("ask"), where),
         )
+        if rn.get("art") is not None:
+            node.art = _read_art(rn["art"], art_dir, where, warnings)
         page = rn.get("page", "new")
         if page not in ("new", "same"):
             raise GameError(f'{where}: page {page!r} inválido (use "new" ou "same")')
@@ -220,7 +247,6 @@ def load(path: str | Path, start: str | None = None) -> Game:
         if n.inside is not None and n.inside not in panels:
             raise GameError(f"nó {n.id}: 'inside' aponta para {n.inside!r}, que não é um painel")
 
-    warnings: list[str] = []
     ignored_from_panel = 0
     for re_ in raw.get("edges", []):
         a, b = re_.get("from"), re_.get("to")
