@@ -15,6 +15,8 @@ Campos opcionais que os redatores podem adicionar aos nós do JSON:
     narrative  texto exibido ao entrar no nó (string, ou lista de parágrafos).
                Ausente = texto pendente (o jogo avisa); "" = nó silencioso de propósito.
                Aceita {var} para interpolar uma variável (ex.: {nome}).
+    page       "new" (padrão): o texto abre uma página nova (espera Enter e limpa a tela);
+               "same": continua na página atual, logo abaixo do texto anterior
     draft      rascunho/nota de design; aparece junto do aviso de texto pendente
     choice     texto exibido quando o nó é uma opção de menu (padrão: `text`)
     prompt     pergunta do menu quando o nó ramifica (padrão: "O que você faz?")
@@ -71,6 +73,7 @@ class Node:
     inside: str | None = None  # id do painel que contém o nó
     narrative: str | None = None  # None = pendente, "" = silencioso
     draft: str = ""
+    page: str = "new"
     choice: str = ""
     prompt: str = ""
     mode: str = "choice"
@@ -204,6 +207,10 @@ def load(path: str | Path, start: str | None = None) -> Game:
             set=_vars(rn.get("set"), where),
             ask=_ask(rn.get("ask"), where),
         )
+        page = rn.get("page", "new")
+        if page not in ("new", "same"):
+            raise GameError(f'{where}: page {page!r} inválido (use "new" ou "same")')
+        node.page = page
         mode = rn.get("mode")
         if mode is not None and mode not in MODES:
             raise GameError(f"{where}: mode {mode!r} inválido (use {', '.join(MODES)})")

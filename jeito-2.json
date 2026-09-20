@@ -70,7 +70,8 @@
       "x": 11224,
       "y": -1421,
       "inside": "n19",
-      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando."
+      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "page": "same"
     },
     {
       "id": "n07",

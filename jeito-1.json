@@ -54,10 +54,11 @@
       "x": 5382,
       "y": -1657,
       "inside": "n27",
-      "narrative": "Você se lembra da interação com as crianças no aniversário do seu sobrinho\n\nCASA DA SUA IRMÃ, ANIVERSÁRIO DE CRIANÇA",
+      "narrative": "Você se lembra da interação com as crianças no aniversário do seu sobrinho",
       "set": {
         "memoria": "A"
-      }
+      },
+      "page": "same"
     },
     {
       "id": "n05",
@@ -86,7 +87,7 @@
       "x": 5382,
       "y": -1453,
       "inside": "n27",
-      "narrative": "Você lembra que sua irmã está grávida e logo vai ser tio. Imagina uma festa de aniversário de criança em um futuro não tão distante. Crianças de todas idades correndo pela casa, muitas brincadeiras e comidas totalmente baseadas em açúcar. A mistura perfeita para a maior gritaria e agitação que já presenciou."
+      "narrative": "CASA DA SUA IRMÃ, ANIVERSÁRIO DE CRIANÇA\n\nVocê lembra que sua irmã está grávida e logo vai ser tio. Imagina uma festa de aniversário de criança em um futuro não tão distante. Crianças de todas idades correndo pela casa, muitas brincadeiras e comidas totalmente baseadas em açúcar. A mistura perfeita para a maior gritaria e agitação que já presenciou."
     },
     {
       "id": "n08",
@@ -95,7 +96,8 @@
       "x": 6273,
       "y": -1453,
       "inside": "n27",
-      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando."
+      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "page": "same"
     },
     {
       "id": "n09",

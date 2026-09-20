@@ -1,6 +1,11 @@
 import json
+import os
+import pty
+import re
+import select
 import shutil
 import subprocess
+import time
 from pathlib import Path
 
 import pytest
@@ -21,7 +26,42 @@ def build(tmp_path: Path, src: Path) -> Path:
 
 
 def play(script: Path, stdin: str, *args: str) -> subprocess.CompletedProcess:
+    args = args if "--auto" in args else ("--no-pause", *args)  # sem Enter entre páginas
     return subprocess.run([BASH, str(script), *args], input=stdin, capture_output=True, text=True, timeout=30)
+
+
+CLEAR = "\x1b[2J\x1b[H"
+
+
+def play_tty(script: Path, keys: list[str]) -> str:
+    """Joga num terminal de verdade (pty): a tela só é limpa quando stdout é um tty."""
+    pid, fd = pty.fork()
+    if pid == 0:
+        os.environ["TERM"] = "xterm"
+        os.execv(BASH, [BASH, str(script)])
+    out = b""
+
+    def drain(t: float) -> None:
+        nonlocal out
+        end = time.time() + t
+        while time.time() < end:
+            if select.select([fd], [], [], 0.05)[0]:
+                try:
+                    chunk = os.read(fd, 65536)
+                except OSError:
+                    return
+                if not chunk:
+                    return
+                out += chunk
+                end = time.time() + 0.2
+
+    drain(0.6)
+    for k in keys:
+        os.write(fd, (k + "\n").encode())
+        drain(0.4)
+    os.close(fd)
+    os.waitpid(pid, 0)
+    return re.sub(r"\x1b\[[0-9;]*m", "", out.decode("utf-8", "replace").replace("\r", ""))
 
 
 @pytest.mark.parametrize("name", ["jeito-1.json", "jeito-2.json"])
@@ -81,3 +121,31 @@ def test_missing_vs_silent_narrative():
     ids = {n.id for n in pending}
     assert "n09" in ids  # sem texto ainda
     assert "n13" not in ids  # narrative "" = silencioso de propósito
+
+
+def test_pages_clear_the_screen_and_wait_for_enter(tmp_path):
+    script = build(tmp_path, ROOT / "tests" / "fixtures" / "pages.json")
+    out = play_tty(script, ["", "1"])  # Enter para passar a 1ª página; depois a escolha do menu
+    screens = out.split(CLEAR)
+    text = [s for s in screens if s.strip()]
+    assert out.count("[Enter para continuar]") == 1  # menu não pede Enter: a escolha já passa adiante
+    # PRIMEIRA sozinha; SEGUNDA e TERCEIRA (page: same) juntas, com o menu embaixo
+    assert "PRIMEIRA" in text[0] and "SEGUNDA" not in text[0]
+    assert "SEGUNDA" in text[1] and "TERCEIRA" in text[1] and "1) UM" in text[1]
+    assert "FIM-UM" in text[2] and "TERCEIRA" not in text[2]
+
+
+def test_no_clear_codes_when_not_a_tty(tmp_path):
+    script = build(tmp_path, ROOT / "tests" / "fixtures" / "pages.json")
+    r = play(script, "1\n")
+    assert "\x1b" not in r.stdout
+    assert "FIM-UM" in r.stdout
+
+
+def test_real_game_first_pages_are_separate_screens(tmp_path):
+    script = build(tmp_path, ROOT / "jeito-2.json")
+    out = play_tty(script, ["Ana", "", ""])
+    text = [s for s in out.split(CLEAR) if s.strip()]
+    assert "Digite seu nome" in text[0]
+    assert text[1].startswith("NA EMPRESA") and "Ana chega" in text[1] and "DENTRO" not in text[1]
+    assert text[2].startswith("DENTRO DO ONIBUS")

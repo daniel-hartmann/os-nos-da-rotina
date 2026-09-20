@@ -1,0 +1,16 @@
+{
+  "schema": "narrative-flow/v1",
+  "game_title": "Paginas",
+  "nodes": [
+    {"id": "n01", "type": "process", "text": "a", "x": 0, "y": 0, "narrative": "PRIMEIRA"},
+    {"id": "n02", "type": "process", "text": "b", "x": 0, "y": 1, "narrative": "SEGUNDA"},
+    {"id": "n03", "type": "process", "text": "c", "x": 0, "y": 2, "narrative": "TERCEIRA", "page": "same"},
+    {"id": "n04", "type": "decision", "text": "d", "x": 0, "y": 3, "prompt": "ESCOLHA?"},
+    {"id": "n05", "type": "process", "text": "e", "x": 0, "y": 4, "choice": "UM", "narrative": "FIM-UM"},
+    {"id": "n06", "type": "process", "text": "f", "x": 1, "y": 4, "choice": "DOIS", "narrative": "FIM-DOIS"}
+  ],
+  "edges": [
+    {"from": "n01", "to": "n02"}, {"from": "n02", "to": "n03"}, {"from": "n03", "to": "n04"},
+    {"from": "n04", "to": "n05"}, {"from": "n04", "to": "n06"}
+  ]
+}
