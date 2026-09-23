@@ -41,7 +41,7 @@
       "text": "DENTRO DO ONIBUS",
       "x": 0,
       "y": 400,
-      "narrative": "DENTRO DO ONIBUS\n\nEnquanto você vai saindo da garagem, uma memória do seu curso lhe vem à cabeça.",
+      "narrative": "DENTRO DO ONIBUS\n\nJá dentro do ônibus, com mais um cafézinho na mão, você conduz o veículo para fora da garagem. Uma memória então lhe vem à cabeça, o curso preparatório da empresa.",
       "art": "onibus"
     },
     {
@@ -62,7 +62,7 @@
       "text": "Introdução LB",
       "x": 6273,
       "y": -1453,
-      "narrative": "Você lembra de uma pessoa atraente que conheceu na capacitação profissional da empresa de transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "narrative": "Você lembra de Carla, uma pessoa atraente que conheceu na capacitação profissional da empresa de transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu a presença. Em algum instante, suas visões se cruzaram.",
       "page": "same"
     },
     {
@@ -87,7 +87,7 @@
       "text": "Cantada",
       "x": 6273,
       "y": -979,
-      "choice": "Dar uma cantada.",
+      "choice": "Falar uma cantada.",
       "narrative": ""
     },
     {
@@ -105,7 +105,7 @@
       "text": "Senta comigo?",
       "x": 5961,
       "y": -777,
-      "narrative": "A pessoa atraente te chama pra sentar do lado dela."
+      "narrative": "Carla te chama pra sentar do lado dela."
     },
     {
       "id": "lb24",
@@ -113,7 +113,7 @@
       "text": "PA fica puta",
       "x": 6273,
       "y": -777,
-      "narrative": "Daniela fica puta e faz escândalo na sala de aula."
+      "narrative": "Carla fica puta e faz escândalo na sala de aula."
     },
     {
       "id": "lb25",
@@ -179,7 +179,7 @@
       "text": "Conversa aula inteira",
       "x": 5801,
       "y": -215,
-      "narrative": "Você e a pessoa atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor à primeira vista."
+      "narrative": "Você e Carla começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor à primeira vista."
     },
     {
       "id": "lb42",
@@ -187,7 +187,7 @@
       "text": "Perde de vista, presta atenção",
       "x": 5961,
       "y": -215,
-      "narrative": "Você presta atenção no curso para evitar agitar a aula, e quando percebe, Daniela saiu da sala. Você a perde de vista."
+      "narrative": "Você presta atenção no curso para evitar agitar a aula, e quando percebe, Carla saiu da sala. Você a perde de vista."
     },
     {
       "id": "lb43",
@@ -195,7 +195,7 @@
       "text": "Presta atenção na aula",
       "x": 6193,
       "y": -215,
-      "narrative": "Você fica mal visto com a pessoa atraente e termina o curso."
+      "narrative": "Você fica mal visto com Carla e termina o curso."
     },
     {
       "id": "lb44",
@@ -275,7 +275,7 @@
       "text": "Parada 2: chegada",
       "x": 0,
       "y": 1500,
-      "narrative": "PARADA 2 — A pessoa atraente entra no ônibus."
+      "narrative": "PARADA 2 — Carla entra no ônibus."
     },
     {
       "id": "j3n08",
@@ -283,7 +283,7 @@
       "text": "Y entra (com atração)",
       "x": 0,
       "y": 1600,
-      "narrative": "Você percebe a pessoa atraente entrando no ônibus. Uma visão alegre para o seu dia. Ela parece mais linda do que da outra vez que vocês se viram. Ela esbanja um lindo sorriso, claramente muito feliz em lhe ver.",
+      "narrative": "Você percebe Carla entrando no ônibus. Uma visão alegre para o seu dia. Ela parece mais linda do que da outra vez que vocês se viram. Ela esbanja um lindo sorriso, claramente muito feliz em lhe ver.",
       "page": "same"
     },
     {
@@ -316,7 +316,7 @@
       "text": "Y entra (sem atração)",
       "x": 600,
       "y": 1600,
-      "narrative": "Você percebe a pessoa atraente entrando no ônibus. Ela nota você e imediatamente faz cara de desprezo, e vocês dois instantaneamente se lembram que tudo poderia ter sido diferente se você não tivesse sido um babaca da última vez que vocês se viram. Ela passa por você vagarosamente, quase como se esperasse que você dissesse algo.",
+      "narrative": "Você percebe Carla entrando no ônibus. Ela nota você e imediatamente faz cara de desprezo, e vocês dois instantaneamente se lembram que tudo poderia ter sido diferente se você não tivesse sido um babaca da última vez que vocês se viram. Ela passa por você vagarosamente, quase como se esperasse que você dissesse algo.",
       "page": "same"
     },
     {
@@ -369,7 +369,7 @@
       "text": "Incidente com Y",
       "x": 0,
       "y": 1900,
-      "narrative": "Visivelmente frustrado, você não percebe que alguém entrou pela porta traseira do ônibus, e está ali incomodando os passageiros. Você nota, através do seu espelho, que a pessoa atraente está sendo incomodada por essa pessoa.",
+      "narrative": "Visivelmente frustrado, você não percebe que alguém entrou pela porta traseira do ônibus, e está ali incomodando os passageiros. Você nota, através do seu espelho, que Carla está sendo incomodada por essa pessoa.",
       "page": "same"
     },
     {
@@ -386,8 +386,8 @@
       "text": "Parar o ônibus",
       "x": 0,
       "y": 2000,
-      "narrative": "A pessoa atraente agradece e vai sentar no meio do ônibus.",
-      "choice": "Parar o ônibus. Vou tirar esse cara daqui.",
+      "narrative": "Carla agradece e vai sentar no meio do ônibus.",
+      "choice": "“Vou parar o ônibus e tirar esse cara daqui.”",
       "set": {
         "assento": "meio"
       }
@@ -398,7 +398,7 @@
       "text": "Final Trágico 1",
       "x": 300,
       "y": 2100,
-      "narrative": "A pessoa atraente tomou uma medida drástica ao se defender de um homem maníaco. Infelizmente isso inutiliza o ônibus completamente, e traumatiza uma velhinha que assistiu toda a situação. Todos estão bem, mas você precisa levar o ônibus de volta para a garagem."
+      "narrative": "Carla tomou uma medida drástica ao se defender de um homem maníaco. Infelizmente isso inutiliza o ônibus completamente, e traumatiza uma velhinha que assistiu toda a situação. Todos estão bem, mas você precisa levar o ônibus de volta para a garagem."
     },
     {
       "id": "j3n20",
@@ -407,7 +407,7 @@
       "x": 300,
       "y": 2000,
       "narrative": "",
-      "choice": "Fazer nada. Ela que se vire."
+      "choice": "“Vou é fazer nada. Ela que se vire.”"
     },
     {
       "id": "j3n21",
@@ -441,7 +441,7 @@
       "text": "Final Feliz 1",
       "x": 300,
       "y": 2700,
-      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. A pessoa atraente faz questão de deixar o zap dela anotado em um pedaço de papel no bolso da sua jaqueta. Ela lhe dá uma piscadinha e pede que você mande mensagem pra ela. Hoje foi um bom dia."
+      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Carla faz questão de deixar o zap dela anotado em um pedaço de papel no bolso da sua jaqueta. Ela lhe dá uma piscadinha e pede que você mande mensagem pra ela. Hoje foi um bom dia."
     },
     {
       "id": "j3n25",
@@ -449,7 +449,7 @@
       "text": "Final Feliz 2",
       "x": 600,
       "y": 2700,
-      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. A pessoa atraente desce do ônibus te dando um olhar pesado. Acho que vocês dois podem concordar que as coisas poderiam ter sido diferentes em outros momentos."
+      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Carla desce do ônibus te dando um olhar pesado. Acho que vocês dois podem concordar que as coisas poderiam ter sido diferentes em outros momentos."
     },
     {
       "id": "j3n26",
@@ -457,7 +457,7 @@
       "text": "Final Trágico 3",
       "x": 900,
       "y": 2700,
-      "narrative": "O peso do julgamento dos passageiros sobre a sua inaptidão no seu trabalho pesa cada vez mais alto na sua consciência. Você frequentemente checa no espelho para ver se a pessoa atraente dá a mínima para você, mas você acaba perdendo a atenção e não percebe um sinal vermelho. O ônibus encosta no carro da frente, causando um pequeno dano. Todos os passageiros são liberados, e você precisa levar o carro de volta para a garagem."
+      "narrative": "O peso do julgamento dos passageiros sobre a sua inaptidão no seu trabalho pesa cada vez mais alto na sua consciência. Você frequentemente checa no espelho para ver se Carla dá a mínima para você, mas você acaba perdendo a atenção e não percebe um sinal vermelho. O ônibus encosta no carro da frente, causando um pequeno dano. Todos os passageiros são liberados, e você precisa levar o carro de volta para a garagem."
     },
     {
       "id": "j3n27",
@@ -496,7 +496,7 @@
       "text": "Passageiros compreendem (com atração)",
       "x": 600,
       "y": 2200,
-      "narrative": "Os passageiros compreendem, e a pessoa atraente fica ainda mais apaixonada por você.",
+      "narrative": "Os passageiros compreendem, e Carla fica ainda mais apaixonada por você.",
       "set": {
         "ajudou_cadeirante": "sim"
       }
@@ -916,9 +916,14 @@
       "situacao": "Falta a 4ª combinação (atração=sim, não ajudou o cadeirante). Assumi que cai no mesmo Final Trágico 3 (o texto dele não depende de atração), mas isso é um chute meu, não algo que o roteiro diz."
     },
     {
-      "fonte": "roteiro novo, Parada 2 e nome da pessoa atraente",
-      "texto": "'PARADA 2 - Carla entra no ônibus.' ... depois sempre chamada de 'Y'",
-      "situacao": "'Carla' só aparece uma vez, no título da parada, e o resto do texto usa 'Y' — tratei os dois como o mesmo placeholder e troquei por 'a pessoa atraente' em todo o texto jogável, igual já tinha sido feito com 'Daniela' antes. Se vocês quiserem dar um nome de verdade pra ela, é só me dizer e eu troco em todo canto (inclusive no jeito-1/jeito-2)."
+      "fonte": "roteiro novo, nome da pessoa atraente (Carla / Y)",
+      "texto": "O texto chama ela de 'Carla' na Lembrança B inteira, no título da Parada 2 e nos dois Finais Feliz, mas ainda usa 'Y' solto no resto (Parada 2/3, Parada 5, Final Trágico 1).",
+      "situacao": "Tratei os dois como o mesmo nome e usei 'Carla' em todo canto no jogo, inclusive nos 'Y' que sobraram, pra não ficar incoerente (uma hora com nome, outra sem). Se algum desses 'Y' era pra ser outra pessoa, me avisem."
+    },
+    {
+      "fonte": "roteiro novo, pessoa gramatical (você/Jorge)",
+      "texto": "'Jorge conduz o veículo para fora da garagem.' e 'Jorge lembra de Carla...' — na 3ª pessoa.",
+      "situacao": "O resto do jogo, incluindo a frase seguinte na mesma cena, fala na 2ª pessoa ('você conduz', 'você percebeu'). Pra não misturar as duas vozes no meio do texto, mantive 'você' nessas duas frases também."
     }
   ]
 }

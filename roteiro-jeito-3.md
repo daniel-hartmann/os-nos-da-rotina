@@ -19,7 +19,8 @@ chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trab
 
 ## DENTRO DO ONIBUS
 
-Enquanto você vai saindo da garagem, uma memória do seu curso lhe vem à cabeça. *[INÍCIO LEMBRANÇA B]*
+Já dentro do ônibus, com mais um cafézinho na mão, Jorge conduz o veículo para fora da garagem. Uma
+memória então lhe vem à cabeça, o curso preparatório da empresa. *[INÍCIO LEMBRANÇA B]*
 
 **PARADA 1** — Pessoas aleatórias entram no ônibus.
 
@@ -55,11 +56,11 @@ você não viu.
 > ali incomodando os passageiros. Você nota, através do seu espelho, que Y está sendo incomodada
 > por essa pessoa.
 >
-> - **Opção 1.** Parar o ônibus. Vou tirar esse cara daqui. *(Y agradece e vai sentar no meio do
+> - **Opção 1.** "Vou parar o ônibus e tirar esse cara daqui." *(Y agradece e vai sentar no meio do
 >   ônibus)*
-> - **Opção 2.** Fazer nada. Ela que se vire. *(O cara estranho incomoda Y até ela tomar uma
->   atitude por conta própria, dando um tiro no homem. Seu ônibus virou uma cena do crime e o dia
->   acaba aqui. = **Final Trágico 1**)*
+> - **Opção 2.** "Vou é fazer nada. Ela que se vire." *(O cara estranho incomoda Y até ela tomar
+>   uma atitude por conta própria, dando um tiro no homem. Seu ônibus virou uma cena do crime e o
+>   dia acaba aqui. = **Final Trágico 1**)*
 
 **PARADA 4** — Cadeirante.
 
@@ -95,14 +96,14 @@ você não viu.
 
 **Final feliz 1**
 
-Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Y faz questão de deixar
-o zap dela anotado em um pedaço de papel no bolso da sua jaqueta. Ela lhe dá uma piscadinha e pede
-que você mande mensagem pra ela. Hoje foi um bom dia.
+Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Carla faz questão de
+deixar o zap dela anotado em um pedaço de papel no bolso da sua jaqueta. Ela lhe dá uma piscadinha
+e pede que você mande mensagem pra ela. Hoje foi um bom dia.
 
 **Final feliz 2**
 
-Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Y desce do ônibus te
-dando um olhar pesado. Acho que vocês dois podem concordar que as coisas poderiam ter sido
+Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. Carla desce do ônibus
+te dando um olhar pesado. Acho que vocês dois podem concordar que as coisas poderiam ter sido
 diferentes em outros momentos.
 
 **Final trágico 1**
@@ -120,43 +121,43 @@ linha e retornar imediatamente para a garagem. E é bom que isso não se repita 
 **Final trágico 3**
 
 O peso do julgamento dos passageiros sobre a sua inaptidão no seu trabalho pesa cada vez mais alto
-na sua consciência. Você frequentemente checa no espelho para ver se Y dá a mínima para você, mas
-você acaba perdendo a atenção e não percebe um sinal vermelho. O ônibus encosta no carro da frente,
-causando um pequeno dano. Todos os passageiros são liberados, e você precisa levar o carro de volta
-para a garagem.
+na sua consciência. Você frequentemente checa no espelho para ver se Carla dá a mínima para você,
+mas você acaba perdendo a atenção e não percebe um sinal vermelho. O ônibus encosta no carro da
+frente, causando um pequeno dano. Todos os passageiros são liberados, e você precisa levar o carro
+de volta para a garagem.
 
 ## LEMBRANÇA B
 
 ### ESCRITÓRIO DA EMPRESA DE ÔNIBUS, CURSO PREPARATÓRIO
 
-Você lembra de Y, uma pessoa atraente que conheceu na capacitação profissional da empresa de
-transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.
+Jorge lembra de Carla, uma pessoa atraente que conheceu na capacitação profissional da empresa de
+transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu a presença. Em
+algum instante, suas visões se cruzaram.
 
 - **LB1.** Dar um oi simpático.
-- **LB2.** Dar uma cantada.
+- **LB2.** Falar uma cantada.
 - **LB3.** Finge indiferença e presta atenção na aula.
 
-**LB1.A.** pessoa atraente te chama pra sentar do lado dela.
+**LB1.A.** Carla te chama pra sentar do lado dela.
 
-- **LB1.A.** Aceitar.
-- **LB1.B.** Prestar atenção na aula. Eu falo com ela depois.
+- **LB1.A.A.** Aceitar.
+- **LB1.A.B.** Prestar atenção na aula. Eu falo com ela depois.
 
-> **LB1.A.** Você e a pessoa atraente começam a conversar por horas a fio. Vocês descobrem que têm
-> muito em comum um com o outro. É amor à primeira vista. *(Não sabe usar o elevador, tem atração
-> mútua)*
+> **LB1.A.A.** Você e Carla começam a conversar por horas a fio. Vocês descobrem que têm muito em
+> comum um com o outro. É amor à primeira vista. *(Não sabe usar o elevador, tem atração mútua)*
 >
-> **LB1.B.** Você presta atenção no curso para evitar agitar a aula, e quando percebe, Daniela saiu
+> **LB1.A.B.** Você presta atenção no curso para evitar agitar a aula, e quando percebe, Carla saiu
 > da sala. Você a perde de vista. *(Sabe usar o elevador, tem atração mútua)*
 
-**LB2.** Daniela fica puta e faz escândalo na sala de aula.
+**LB2.A.** Carla fica puta e faz escândalo na sala de aula.
 
-- **LB2.A.** Pedir desculpa e voltar a prestar atenção na aula
-- **LB2.B.** Fazer um escândalo e dizer que é culpa dela que deu moral.
+- **LB2.A.A.** Pedir desculpa e voltar a prestar atenção na aula
+- **LB2.A.B.** Fazer um escândalo e dizer que é culpa dela que deu moral.
 
-> **LB2.A.** Você fica mal visto com a pessoa atraente e termina o curso. *(Sabe usar o elevador,
-> sem atração)*
+> **LB2.A.A.** Você fica mal visto com Carla e termina o curso. *(Sabe usar o elevador, sem
+> atração)*
 >
-> **LB2.B.** Você é expulso do curso. *(Não sabe usar o elevador, sem atração)*
+> **LB2.A.B.** Você é expulso do curso. *(Não sabe usar o elevador, sem atração)*
 
 **LB3.** Você completa o curso *(Sabe usar o elevador, sem atração)*
 
@@ -169,15 +170,19 @@ transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você p
 Coisas que o texto acima deixava em aberto e que eu precisei decidir para o jogo rodar. Estão
 marcadas como `unmapped_notes` dentro do próprio [`jeito-3.json`](jeito-3.json):
 
-- **"Y" e "Carla"** — a Parada 2 chama a personagem de "Carla" no título e de "Y" no resto do
-  texto. Tratei os dois como o mesmo placeholder e usei **"a pessoa atraente"** no jogo (igual já
-  tinha sido feito com "Daniela" no roteiro-base). Se vocês quiserem dar um nome de verdade pra
-  ela, é só pedir — troco em todo canto, inclusive no `jeito-1.json`/`jeito-2.json`.
-- **Sem pergunta de nome** — como o protagonista já é "Jorge" (nome fixo, diferente do `X` genérico
-  do roteiro-base), o jeito-3 não pergunta o nome do jogador.
+- **Carla, no lugar de "Y"** — este roteiro já chama ela de Carla na Lembrança B inteira, no título
+  da Parada 2 e nos dois Finais Feliz, mas ainda usa "Y" solto no resto (Parada 2/3, Parada 5 e no
+  Final Trágico 1) — dá pra ver que é o mesmo nome ainda sendo espalhado pelo texto. Usei **Carla**
+  em todo canto no jogo, inclusive nesses "Y" que sobraram, pra não ficar incoerente (uma hora com
+  nome, outra sem). Se algum desses "Y" era pra ser outra coisa, me avisem.
+- **2ª pessoa, não 3ª** — duas frases novas trocaram "você" por "Jorge" ("Jorge conduz o veículo...",
+  "Jorge lembra de Carla..."), mas todo o resto do jogo (inclusive a frase logo depois, na mesma
+  cena) fala na 2ª pessoa ("você conduz", "você percebeu"). Para não misturar as duas vozes no meio
+  do texto, mantive "você" nessas duas frases também. Se for pra virar o jogo inteiro pra 3ª pessoa,
+  aí sim eu troco tudo, não só essas duas.
 - **Parada 4, opção "Ignorar", quando ela gosta de você** — o texto só diz o que acontece se ela
-  *não* gosta de você (denúncia = Final trágico 2). Se ela gosta de você e mesmo assim você ignora
-  o cadeirante, não fica um final imediato definido; assumi que o jogo segue pra Parada 5 do jeito
+  *não* gosta de você (denúncia = Final trágico 2). Se ela gosta e mesmo assim você ignora o
+  cadeirante, não fica um final imediato definido; assumi que o jogo segue pra Parada 5 do jeito
   normal, só que sem ter ajudado o cadeirante.
 - **Parada 5, combinação que falta na tabela** — a tabela de finais cobre 3 das 4 combinações
   possíveis de (ela gosta de você) × (você ajudou o cadeirante). Falta "ela gosta de você, mas você
