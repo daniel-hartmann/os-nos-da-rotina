@@ -17,15 +17,6 @@
       "narrative": "Você é Jorge e recentemente começou o emprego como motorista de ônibus na sua cidade. Seu trabalho é monótono, porém muito importante. Os horários precisam ser cumpridos à risca, pois muitas pessoas dependem da sua pontualidade. Na sua casa, você vai dormir cedo porque sabe que terá um longo dia pela frente amanhã."
     },
     {
-      "id": "j3n02",
-      "type": "process",
-      "text": "Chegada na empresa",
-      "x": 0,
-      "y": 100,
-      "narrative": "",
-      "art": "empresa"
-    },
-    {
       "id": "j3n03",
       "type": "process",
       "text": "Garagem da empresa",
@@ -62,7 +53,8 @@
       "narrative": "ESCRITÓRIO DA EMPRESA DE ÔNIBUS, CURSO PREPARATÓRIO",
       "set": {
         "memoria": "B"
-      }
+      },
+      "art": "empresa"
     },
     {
       "id": "lb08",
@@ -572,10 +564,6 @@
   "edges": [
     {
       "from": "j3n01",
-      "to": "j3n02"
-    },
-    {
-      "from": "j3n02",
       "to": "j3n03"
     },
     {

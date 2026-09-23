@@ -161,19 +161,20 @@ def test_real_game_first_pages_are_separate_screens(tmp_path):
     # Pega o texto das artes já normalizado pelo `load()` (o mesmo que vai pro jogo), em vez de
     # fixar um trecho: o teste continua valendo depois que alguém redesenhar as artes.
     game = load(ROOT / "jeito-2.json")
-    empresa_art = game.nodes["artEmpresa"].art
     garagem_art = game.nodes["artGaragem"].art
     onibus_art = game.nodes["n03"].art
+    empresa_art = game.nodes["n04"].art  # a arte do prédio mora na Lembrança B (cena do escritório)
 
     script = build(tmp_path, ROOT / "jeito-2.json")
-    out = play_tty(script, ["Ana", "", "", ""])
+    out = play_tty(script, ["Ana", "", ""])
     text = [s for s in out.split(CLEAR) if s.strip()]
     assert "Digite seu nome" in text[0]
-    assert empresa_art in text[1] and "NA EMPRESA" not in text[1]  # arte da empresa sozinha
     # arte da garagem + o texto de "NA EMPRESA" (que fala da garagem), na mesma tela
-    assert garagem_art in text[2] and text[2].index(garagem_art) < text[2].index("NA EMPRESA") < text[2].index("Ana chega")
-    assert "DENTRO" not in text[2]
-    assert onibus_art in text[3] and "DENTRO DO ONIBUS" in text[3]  # ônibus em ASCII + texto, na mesma tela
+    assert garagem_art in text[1] and text[1].index(garagem_art) < text[1].index("NA EMPRESA") < text[1].index("Ana chega")
+    assert onibus_art in text[2] and "DENTRO DO ONIBUS" in text[2]  # ônibus em ASCII + texto, na mesma tela
+    assert "ESCRITÓRIO" not in text[1] and "ESCRITÓRIO" not in text[2] and empresa_art not in text[1]
+    # a arte do prédio aparece só na cena do escritório/curso, junto com o texto dela
+    assert empresa_art in text[3] and "ESCRITÓRIO" in text[3] and "O que você faz?" in text[3]
 
 
 def test_art_is_shown_verbatim_above_the_text(tmp_path):

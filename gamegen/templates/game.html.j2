@@ -9,51 +9,119 @@
   :root {
     --bg: #14110f; --fg: #efe8dc; --dim: #9a8f80; --accent: #e8b04a;
     --card: #1d1915; --border: #3a332b; --err: #ff8a7a;
+    --glow: 232, 176, 74; /* --accent em r,g,b, pra usar com alpha em box-shadow/rgba() */
+    --vignette: rgba(0, 0, 0, .55);
+    --ease: cubic-bezier(.22, .8, .32, 1);
   }
   @media (prefers-color-scheme: light) {
     :root {
       --bg: #f6f1e7; --fg: #241f19; --dim: #6f6454; --accent: #8a4f00;
       --card: #fffaf0; --border: #d8ccb6; --err: #b3261e;
+      --glow: 138, 79, 0;
+      --vignette: rgba(60, 46, 20, .12);
     }
   }
   * { box-sizing: border-box; }
   html { background: var(--bg); }
   body {
-    margin: 0; background: var(--bg); color: var(--fg);
+    margin: 0; min-height: 100dvh; background: var(--bg); color: var(--fg);
     font: 19px/1.65 Georgia, "Times New Roman", serif;
     -webkit-text-size-adjust: 100%;
+    /* vinheta suave nos cantos + grão bem discreto, pra dar clima de livro/tela antiga sem
+       atrapalhar a leitura (o grão é puro CSS, sem imagem) */
+    background-image:
+      radial-gradient(ellipse at 50% -10%, rgba(var(--glow), .10), transparent 55%),
+      radial-gradient(ellipse at 50% 120%, var(--vignette), transparent 60%),
+      repeating-conic-gradient(rgba(127, 127, 127, .4) 0% 0.03%, transparent 0% 0.06%);
+    background-blend-mode: normal, normal, overlay;
+    background-attachment: fixed;
   }
-  main { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1rem 6rem; }
+  main {
+    max-width: 44rem; margin: 0 auto; padding: 2.5rem 1rem 6rem;
+    min-height: 100dvh;
+  }
   h1.title {
-    margin: 0 0 1.5rem; font-size: 1.05rem; font-weight: 600; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--accent);
+    position: relative;
+    margin: 0 0 1.75rem; padding-bottom: .85rem; font-size: 1.05rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+  }
+  h1.title::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 3rem;
+    background: linear-gradient(90deg, var(--accent), transparent);
   }
   pre.art {
     margin: 0 0 1.75rem; color: var(--accent); overflow-x: auto;
     font: clamp(9px, 2.7vw, 15px)/1.15 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-    white-space: pre;
+    white-space: pre; text-shadow: 0 0 18px rgba(var(--glow), .25);
   }
   p { margin: 0 0 1.1rem; white-space: pre-line; overflow-wrap: anywhere; }
   p.pending, p.info, p.debug { color: var(--dim); font-size: .9em; }
   p.pending small { display: block; }
   p.error { color: var(--err); }
-  p.prompt { margin-top: 1.5rem; font-weight: 600; }
+  p.prompt {
+    margin-top: 1.5rem; font-weight: 600; padding-left: .7rem;
+    border-left: 2px solid rgba(var(--glow), .5);
+  }
   p.end { color: var(--dim); margin-top: 2rem; }
-  .menu { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .5rem; }
+
+  /* cada bloco de tela entra com uma leve subida + esmaecimento; rápido o bastante pra não
+     atravancar a leitura, e desligado por completo se a pessoa pediu menos animação. */
+  #screen > * { animation: enter .38s var(--ease) both; }
+  #screen > *:nth-child(n+2) { animation-delay: .05s; }
+  #screen > *:nth-child(n+4) { animation-delay: .09s; }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .menu { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .55rem; }
   button, input {
     font: inherit; color: inherit; background: var(--card);
     border: 1px solid var(--border); border-radius: .5rem;
+    transition: border-color .18s var(--ease), background-color .18s var(--ease),
+      box-shadow .18s var(--ease), transform .12s var(--ease), opacity .18s var(--ease);
   }
-  button { padding: .65rem .9rem; min-height: 2.75rem; cursor: pointer; text-align: left; }
-  button:hover:not(:disabled), button:focus-visible { border-color: var(--accent); outline: none; }
+  button {
+    padding: .65rem .9rem .65rem 1.1rem; min-height: 2.75rem; cursor: pointer; text-align: left;
+    position: relative; overflow: hidden;
+  }
+  /* barrinha de destaque à esquerda, que "acende" no hover/foco — dá uma resposta tátil sem
+     mudar o texto nem o tamanho do botão */
+  button::before {
+    content: ""; position: absolute; left: 0; top: .35rem; bottom: .35rem; width: 3px;
+    border-radius: 2px; background: var(--accent); transform: scaleY(0);
+    transform-origin: center; transition: transform .18s var(--ease);
+  }
+  button:hover:not(:disabled)::before, button:focus-visible::before, button.chosen::before { transform: scaleY(1); }
+  button:hover:not(:disabled), button:focus-visible {
+    border-color: var(--accent); outline: none; background: rgba(var(--glow), .07);
+  }
+  button:hover:not(:disabled) { transform: translateX(1px); }
+  button:active:not(:disabled) { transform: translateX(1px) scale(.99); }
   button:focus-visible, input:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
-  button:disabled { cursor: default; opacity: .55; }
-  button.chosen { opacity: 1; border-color: var(--accent); }
-  button .n { color: var(--accent); margin-right: .6rem; font-variant-numeric: tabular-nums; }
-  button.continue { color: var(--accent); }
+  button:disabled { cursor: default; opacity: .5; }
+  button.chosen {
+    opacity: 1; border-color: var(--accent); background: rgba(var(--glow), .1);
+  }
+  button.continue {
+    color: var(--accent); font-weight: 600;
+    animation: enter .38s var(--ease) both, breathe 2.6s ease-in-out .4s infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(var(--glow), 0); }
+    50% { box-shadow: 0 0 0 3px rgba(var(--glow), .12); }
+  }
   .row { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
-  input[type=text] { padding: .6rem .8rem; min-width: 14rem; flex: 1 1 14rem; }
+  input[type=text] {
+    padding: .6rem .8rem; min-width: 14rem; flex: 1 1 14rem; caret-color: var(--accent);
+  }
+  ::selection { background: rgba(var(--glow), .35); color: var(--fg); }
   noscript { display: block; padding: 2rem 1rem; text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #screen > *, button.continue { animation: none !important; }
+    button, input { transition: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -145,20 +213,19 @@
     },
 
     menu: function (prompt, labels) {
+      // Sem a pergunta e sem numerar visivelmente: as falas continuam a cena, não viram
+      // questionário. 1-9 ainda escolhem pelo teclado (fica só a dica no rodapé).
       return interaction(function (done) {
-        screen.append(el("p", "prompt", prompt));
-        var ol = el("ol", "menu");
+        var wrap = el("div", "menu");
         var buttons = labels.map(function (label, i) {
-          var li = el("li");
           var b = el("button");
-          b.append(el("span", "n", String(i + 1)), document.createTextNode(label));
-          li.append(b);
-          ol.append(li);
+          b.append(document.createTextNode(label));
+          wrap.append(b);
           b.addEventListener("click", function () { choose(i); });
           return b;
         });
-        screen.append(ol);
-        reveal(ol); // sem foco automático: um Enter distraído não escolhe a 1ª opção
+        screen.append(wrap);
+        reveal(wrap); // sem foco automático: um Enter distraído não escolhe a 1ª opção
         function choose(i) {
           buttons.forEach(function (b) { b.disabled = true; });
           buttons[i].classList.add("chosen");

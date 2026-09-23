@@ -32,15 +32,6 @@
       }
     },
     {
-      "id": "artEmpresa",
-      "type": "process",
-      "text": "Chegada na empresa",
-      "x": 2834,
-      "y": -2051,
-      "narrative": "",
-      "art": "empresa"
-    },
-    {
       "id": "artGaragem",
       "type": "process",
       "text": "Garagem da empresa",
@@ -90,7 +81,8 @@
       "narrative": "ESCRITÓRIO DA EMPRESA DE ÔNIBUS, CURSO PREPARATÓRIO",
       "set": {
         "memoria": "B"
-      }
+      },
+      "art": "empresa"
     },
     {
       "id": "n06",
@@ -1527,19 +1519,19 @@
     },
     {
       "from": "n102",
-      "to": "artEmpresa"
+      "to": "artGaragem"
     },
     {
       "from": "n101",
-      "to": "artEmpresa"
+      "to": "artGaragem"
     },
     {
       "from": "n81",
-      "to": "artEmpresa"
+      "to": "artGaragem"
     },
     {
       "from": "n59",
-      "to": "artEmpresa"
+      "to": "artGaragem"
     },
     {
       "from": "n02",
@@ -1547,7 +1539,7 @@
     },
     {
       "from": "n01",
-      "to": "artEmpresa"
+      "to": "artGaragem"
     },
     {
       "from": "n62",
@@ -1556,10 +1548,6 @@
     {
       "from": "n06",
       "to": "n27"
-    },
-    {
-      "from": "artEmpresa",
-      "to": "artGaragem"
     },
     {
       "from": "artGaragem",
