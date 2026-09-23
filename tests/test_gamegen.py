@@ -158,15 +158,22 @@ def test_no_clear_codes_when_not_a_tty(tmp_path):
 
 
 def test_real_game_first_pages_are_separate_screens(tmp_path):
+    # Pega o texto das artes já normalizado pelo `load()` (o mesmo que vai pro jogo), em vez de
+    # fixar um trecho: o teste continua valendo depois que alguém redesenhar as artes.
+    game = load(ROOT / "jeito-2.json")
+    empresa_art = game.nodes["artEmpresa"].art
+    garagem_art = game.nodes["artGaragem"].art
+    onibus_art = game.nodes["n03"].art
+
     script = build(tmp_path, ROOT / "jeito-2.json")
     out = play_tty(script, ["Ana", "", "", ""])
     text = [s for s in out.split(CLEAR) if s.strip()]
     assert "Digite seu nome" in text[0]
-    assert "IIIII" in text[1] and "NA EMPRESA" not in text[1]  # arte da empresa (prédio) sozinha
+    assert empresa_art in text[1] and "NA EMPRESA" not in text[1]  # arte da empresa sozinha
     # arte da garagem + o texto de "NA EMPRESA" (que fala da garagem), na mesma tela
-    assert "BAIA 1" in text[2] and text[2].index("BAIA 1") < text[2].index("NA EMPRESA") < text[2].index("Ana chega")
+    assert garagem_art in text[2] and text[2].index(garagem_art) < text[2].index("NA EMPRESA") < text[2].index("Ana chega")
     assert "DENTRO" not in text[2]
-    assert "DENTRO DO ONIBUS" in text[3]  # ônibus em ASCII + texto, na mesma tela
+    assert onibus_art in text[3] and "DENTRO DO ONIBUS" in text[3]  # ônibus em ASCII + texto, na mesma tela
 
 
 def test_art_is_shown_verbatim_above_the_text(tmp_path):
