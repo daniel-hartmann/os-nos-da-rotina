@@ -4,6 +4,8 @@ Gera um jogo de texto interativo a partir do grafo narrativo (`jeito-1.json`, `j
 exportado do Miro. Alvos: **bash** e **html**. O alvo **bat** (Windows) está em andamento e fora do
 `-t all`, do site e do workflow. Novos alvos entram como módulos em `gamegen/targets/`.
 
+O roteiro-base (o texto original, antes de virar grafo) está em [roteiro.md](roteiro.md).
+
 Dependências controladas por [uv](https://docs.astral.sh/uv/) (`pyproject.toml` + `uv.lock`).
 
 ## Uso
@@ -78,7 +80,6 @@ gamegen/targets/bash.py    backend bash        gamegen/templates/bash.sh.j2
 gamegen/cli.py             linha de comando
 tests/                     pytest (inclui rodar os scripts gerados)
 ```
-# os-nos-da-rotina
 
 ## Artes ASCII
 
@@ -93,7 +94,13 @@ A arte aparece no topo da página do nó, seguida de uma linha em branco e do te
 script na hora de gerar, então o jogo continua sendo um único arquivo. Um nó pode ter só a arte
 (`"narrative": ""`). Dicas: até 78 colunas (o gerador avisa se passar), só ASCII, indentação faz
 parte do desenho (linhas vazias no começo e no fim são ignoradas). Outra pasta: `--art-dir`.
-`arte/onibus.txt` é o exemplo atual.
+
+Hoje tem quatro: `arte/onibus.txt` (o ônibus, em "DENTRO DO ÔNIBUS"), `arte/empresa.txt` (o prédio
+da empresa) e `arte/garagem.txt` (a garagem com as baias), as duas em "NA EMPRESA", e
+`arte/festa.txt` (a festa de aniversário), na LEMBRANÇA A — essa última só existe no jeito-1, que é
+o único com essa lembrança. Quando um nó tem `art`, o texto dele entra na mesma página da arte por
+padrão; para encadear mais de uma arte antes do texto, veja como `artEmpresa`/`artGaragem`/`artFesta`
+fazem isso em `jeito-1.json`/`jeito-2.json` (nós só de arte, com `"page": "same"` no nó seguinte).
 
 ## HTML e GitHub Pages
 

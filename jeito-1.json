@@ -32,12 +32,31 @@
       }
     },
     {
+      "id": "artEmpresa",
+      "type": "process",
+      "text": "Chegada na empresa",
+      "x": 2834,
+      "y": -2051,
+      "narrative": "",
+      "art": "empresa"
+    },
+    {
+      "id": "artGaragem",
+      "type": "process",
+      "text": "Garagem da empresa",
+      "x": 2834,
+      "y": -2021,
+      "narrative": "",
+      "art": "garagem"
+    },
+    {
       "id": "n02",
       "type": "process",
       "text": "Na manhã do dia seguinte",
       "x": 2834,
       "y": -1991,
-      "narrative": "NA EMPRESA\n\nNa manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, {nome} chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho."
+      "narrative": "NA EMPRESA\n\nNa manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, {nome} chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho.",
+      "page": "same"
     },
     {
       "id": "n03",
@@ -82,13 +101,24 @@
       "mode": "random"
     },
     {
+      "id": "artFesta",
+      "type": "process",
+      "text": "Festa de aniversário",
+      "x": 5382,
+      "y": -1483,
+      "narrative": "",
+      "art": "festa",
+      "inside": "n27"
+    },
+    {
       "id": "n07",
       "type": "process",
       "text": "Introdução LA",
       "x": 5382,
       "y": -1453,
       "inside": "n27",
-      "narrative": "CASA DA SUA IRMÃ, ANIVERSÁRIO DE CRIANÇA\n\nVocê lembra que sua irmã está grávida e logo vai ser tio. Imagina uma festa de aniversário de criança em um futuro não tão distante. Crianças de todas idades correndo pela casa, muitas brincadeiras e comidas totalmente baseadas em açúcar. A mistura perfeita para a maior gritaria e agitação que já presenciou."
+      "narrative": "CASA DA SUA IRMÃ, ANIVERSÁRIO DE CRIANÇA\n\nVocê lembra que sua irmã está grávida e logo vai ser tio. Imagina uma festa de aniversário de criança em um futuro não tão distante. Crianças de todas idades correndo pela casa, muitas brincadeiras e comidas totalmente baseadas em açúcar. A mistura perfeita para a maior gritaria e agitação que já presenciou.",
+      "page": "same"
     },
     {
       "id": "n08",
@@ -97,7 +127,7 @@
       "x": 6273,
       "y": -1453,
       "inside": "n27",
-      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "narrative": "Você lembra de uma pessoa atraente que conheceu na capacitação profissional da empresa de transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
       "page": "same"
     },
     {
@@ -241,7 +271,7 @@
       "x": 5961,
       "y": -777,
       "inside": "n27",
-      "narrative": "Daniela te chama pra sentar do lado dela."
+      "narrative": "A pessoa atraente te chama pra sentar do lado dela."
     },
     {
       "id": "n24",
@@ -402,7 +432,7 @@
       "x": 5801,
       "y": -215,
       "inside": "n27",
-      "narrative": "Você e Pessoa Atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor a primeira vista."
+      "narrative": "Você e a pessoa atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor à primeira vista."
     },
     {
       "id": "n42",
@@ -420,7 +450,7 @@
       "x": 6193,
       "y": -215,
       "inside": "n27",
-      "narrative": "Você fica mal visto com Daniela e termina o curso."
+      "narrative": "Você fica mal visto com a pessoa atraente e termina o curso."
     },
     {
       "id": "n44",
@@ -1493,23 +1523,23 @@
     },
     {
       "from": "n04",
-      "to": "n07"
+      "to": "artFesta"
     },
     {
       "from": "n102",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n101",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n81",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n59",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n02",
@@ -1517,7 +1547,7 @@
     },
     {
       "from": "n01",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n62",
@@ -1526,6 +1556,18 @@
     {
       "from": "n06",
       "to": "n27"
+    },
+    {
+      "from": "artEmpresa",
+      "to": "artGaragem"
+    },
+    {
+      "from": "artGaragem",
+      "to": "n02"
+    },
+    {
+      "from": "artFesta",
+      "to": "n07"
     }
   ],
   "notes": [

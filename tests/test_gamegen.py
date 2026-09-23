@@ -144,12 +144,14 @@ def test_no_clear_codes_when_not_a_tty(tmp_path):
 
 def test_real_game_first_pages_are_separate_screens(tmp_path):
     script = build(tmp_path, ROOT / "jeito-2.json")
-    out = play_tty(script, ["Ana", "", ""])
+    out = play_tty(script, ["Ana", "", "", ""])
     text = [s for s in out.split(CLEAR) if s.strip()]
     assert "Digite seu nome" in text[0]
-    assert text[1].startswith("NA EMPRESA") and "Ana chega" in text[1] and "DENTRO" not in text[1]
-    assert "OS NOS DA ROTINA" in text[2] and "DENTRO DO ONIBUS" in text[2]  # ônibus em ASCII + texto
-    assert text[2].index("OS NOS DA ROTINA") < text[2].index("DENTRO DO ONIBUS")
+    assert "IIIII" in text[1] and "NA EMPRESA" not in text[1]  # arte da empresa (prédio) sozinha
+    # arte da garagem + o texto de "NA EMPRESA" (que fala da garagem), na mesma tela
+    assert "BAIA 1" in text[2] and text[2].index("BAIA 1") < text[2].index("NA EMPRESA") < text[2].index("Ana chega")
+    assert "DENTRO" not in text[2]
+    assert "DENTRO DO ONIBUS" in text[3]  # ônibus em ASCII + texto, na mesma tela
 
 
 def test_art_is_shown_verbatim_above_the_text(tmp_path):

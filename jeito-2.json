@@ -32,12 +32,31 @@
       }
     },
     {
+      "id": "artEmpresa",
+      "type": "process",
+      "text": "Chegada na empresa",
+      "x": 9378,
+      "y": -2051,
+      "narrative": "",
+      "art": "empresa"
+    },
+    {
+      "id": "artGaragem",
+      "type": "process",
+      "text": "Garagem da empresa",
+      "x": 9378,
+      "y": -2021,
+      "narrative": "",
+      "art": "garagem"
+    },
+    {
       "id": "n02",
       "type": "process",
       "text": "Na manhã do dia seguinte",
       "x": 9378,
       "y": -1991,
-      "narrative": "NA EMPRESA\n\nNa manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, {nome} chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho."
+      "narrative": "NA EMPRESA\n\nNa manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, {nome} chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho.",
+      "page": "same"
     },
     {
       "id": "n03",
@@ -71,7 +90,7 @@
       "x": 11224,
       "y": -1421,
       "inside": "n19",
-      "narrative": "Você se lembra da primeira vez que conheceu Pessoa Atraente. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "narrative": "Você lembra de uma pessoa atraente que conheceu na capacitação profissional da empresa de transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
       "page": "same"
     },
     {
@@ -142,7 +161,7 @@
       "x": 10913,
       "y": -745,
       "inside": "n19",
-      "narrative": "Daniela te chama pra sentar do lado dela."
+      "narrative": "A pessoa atraente te chama pra sentar do lado dela."
     },
     {
       "id": "n15",
@@ -300,7 +319,7 @@
       "x": 10753,
       "y": -183,
       "inside": "n19",
-      "narrative": "Você e Pessoa Atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor a primeira vista."
+      "narrative": "Você e a pessoa atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor à primeira vista."
     },
     {
       "id": "n33",
@@ -318,7 +337,7 @@
       "x": 11144,
       "y": -183,
       "inside": "n19",
-      "narrative": "Você fica mal visto com Daniela e termina o curso."
+      "narrative": "Você fica mal visto com a pessoa atraente e termina o curso."
     },
     {
       "id": "n35",
@@ -848,15 +867,15 @@
     },
     {
       "from": "n60",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n59",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n43",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n02",
@@ -864,7 +883,7 @@
     },
     {
       "from": "n01",
-      "to": "n02"
+      "to": "artEmpresa"
     },
     {
       "from": "n19",
@@ -873,6 +892,14 @@
     {
       "from": "n05",
       "to": "n19"
+    },
+    {
+      "from": "artEmpresa",
+      "to": "artGaragem"
+    },
+    {
+      "from": "artGaragem",
+      "to": "n02"
     }
   ],
   "notes": [
