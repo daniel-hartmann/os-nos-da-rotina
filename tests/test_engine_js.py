@@ -9,7 +9,7 @@ import pytest
 
 from gamegen.export import to_json
 from gamegen.model import load
-from tests.invariants import problems
+from tests.invariants import problems, problems3
 
 ROOT = Path(__file__).resolve().parent.parent
 HARNESS = ROOT / "tests" / "engine_harness.js"
@@ -46,6 +46,29 @@ def test_real_games_are_coherent_in_auto_mode(tmp_path, jeito):
         seen.update(res["trace"])
     expected = {n.id for n in load(src).nodes.values()}
     assert expected - seen == set(), "nós que nunca rodaram"
+
+
+def test_jeito3_reaches_every_ending_and_stays_coherent(tmp_path):
+    # jeito-3 não tem "memória A/B por sorteio": é sempre a mesma Lembrança B, e o jogo termina
+    # num dos 5 "Final ..." (2 deles são saídas imediatas, sem passar pela Parada 5).
+    src = ROOT / "jeito-3.json"
+    game = load(src)
+    data = tmp_path / "d.json"
+    data.write_text(to_json(game), encoding="utf-8")
+    seen: set[str] = set()
+    endings: dict[str, int] = {}
+    for seed in range(1, 301):
+        r = subprocess.run([NODE, str(HARNESS), str(data), "auto", str(seed)], capture_output=True, text=True, timeout=60)
+        res = json.loads(r.stdout)
+        assert res["error"] is None
+        assert res["events"][-1] == ["end"]
+        seen.update(res["trace"])
+        last = game.nodes[res["trace"][-1]]
+        ended = last.label.startswith("Final ")
+        assert problems3(last.label, ended, res["vars"]) == [], f"seed {seed}: {last.label} {res['vars']}"
+        endings[last.label] = endings.get(last.label, 0) + 1
+    assert {n.id for n in game.nodes.values()} - seen == set(), "nós que nunca rodaram"
+    assert len(endings) == 5, f"esperava os 5 finais, veio {endings}"
 
 
 def test_pages_wait_and_clear(tmp_path):

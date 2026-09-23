@@ -1,10 +1,14 @@
 # gamegen — Os Nós da Rotina
 
-Gera um jogo de texto interativo a partir do grafo narrativo (`jeito-1.json`, `jeito-2.json`),
-exportado do Miro. Alvos: **bash** e **html**. O alvo **bat** (Windows) está em andamento e fora do
-`-t all`, do site e do workflow. Novos alvos entram como módulos em `gamegen/targets/`.
+Gera um jogo de texto interativo a partir de um grafo narrativo. `jeito-1.json` e `jeito-2.json`
+vieram do board do Miro; `jeito-3.json` é um roteiro novo, escrito à mão diretamente no formato do
+grafo (sem Miro por trás — veja `source` dentro do próprio arquivo). Os três seguem o mesmo schema
+`narrative-flow/v1` e passam pelo mesmo gerador. Alvos: **bash** e **html**. O alvo **bat** (Windows)
+está em andamento e fora do `-t all`, do site e do workflow. Novos alvos entram como módulos em
+`gamegen/targets/`.
 
-O roteiro-base (o texto original, antes de virar grafo) está em [roteiro.md](roteiro.md).
+O roteiro-base (o texto original, antes de virar grafo) está em [roteiro.md](roteiro.md); o do
+jeito-3 está em [roteiro-jeito-3.md](roteiro-jeito-3.md).
 
 Dependências controladas por [uv](https://docs.astral.sh/uv/) (`pyproject.toml` + `uv.lock`).
 
@@ -14,8 +18,8 @@ Dependências controladas por [uv](https://docs.astral.sh/uv/) (`pyproject.toml`
 uv run python -m gamegen jeito-1.json            # gera dist/jeito-1.sh
 uv run python -m gamegen jeito-2.json -o jogo.sh
 uv run python -m gamegen jeito-1.json --check -v # só valida e lista os textos que faltam
-uv run python -m gamegen jeito-1.json jeito-2.json -t all   # bash + html em dist/
-uv run python -m gamegen --site _site jeito-1.json jeito-2.json   # site completo (o que o Pages publica)
+uv run python -m gamegen jeito-1.json jeito-2.json jeito-3.json -t all   # bash + html em dist/
+uv run python -m gamegen --site _site jeito-1.json jeito-2.json jeito-3.json   # site completo (o que o Pages publica)
 uv run pytest                                    # testes
 ```
 
@@ -98,9 +102,10 @@ parte do desenho (linhas vazias no começo e no fim são ignoradas). Outra pasta
 Hoje tem quatro: `arte/onibus.txt` (o ônibus, em "DENTRO DO ÔNIBUS"), `arte/empresa.txt` (o prédio
 da empresa) e `arte/garagem.txt` (a garagem com as baias), as duas em "NA EMPRESA", e
 `arte/festa.txt` (a festa de aniversário), na LEMBRANÇA A — essa última só existe no jeito-1, que é
-o único com essa lembrança. Quando um nó tem `art`, o texto dele entra na mesma página da arte por
-padrão; para encadear mais de uma arte antes do texto, veja como `artEmpresa`/`artGaragem`/`artFesta`
-fazem isso em `jeito-1.json`/`jeito-2.json` (nós só de arte, com `"page": "same"` no nó seguinte).
+o único com essa lembrança; `jeito-3.json` também usa `onibus`/`empresa`/`garagem`, do mesmo jeito.
+Quando um nó tem `art`, o texto dele entra na mesma página da arte por padrão; para encadear mais de
+uma arte antes do texto, veja como `artEmpresa`/`artGaragem` fazem isso nos três `jeito-N.json` (nós
+só de arte, com `"page": "same"` no nó seguinte).
 
 ## HTML e GitHub Pages
 

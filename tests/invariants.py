@@ -47,3 +47,21 @@ def problems(jeito: int, trace: list[str]) -> list[str]:
         if trace.count(e) > 1:
             out.append(f"memória repetida: {e}")
     return out
+
+
+# jeito-3: sem posições do Miro (roteiro escrito à mão), então as invariantes são pelo
+# rótulo final (data.nodes[id].label = "Final ...") e pelo estado (vars), não por id de nó.
+def problems3(last_label: str, ended: bool, vars: dict) -> list[str]:
+    out = []
+    if not ended:
+        return ["não terminou num nó 'Final ...'"]
+    atracao, ok = vars.get("atracao"), vars.get("ajudou_cadeirante")
+    expect = {
+        "Final Trágico 2": atracao == "nao",
+        "Final Feliz 1": atracao == "sim" and ok == "sim",
+        "Final Feliz 2": atracao == "nao" and ok == "sim",
+        "Final Trágico 3": ok == "nao",
+    }
+    if last_label in expect and not expect[last_label]:
+        out.append(f"{last_label} incoerente com atracao={atracao} ajudou_cadeirante={ok}")
+    return out

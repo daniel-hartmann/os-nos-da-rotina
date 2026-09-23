@@ -17,6 +17,8 @@ Setembro, 2026
 > definitivo de cada resultado já está escrito nos dois JSONs; aqui ficam o rascunho e as
 > notas de estado entre parênteses/colchetes, do jeito que a equipe as escreveu. Para ver
 > o que ainda está pendente em cada fluxo, rode `uv run python -m gamegen jeito-1.json --check -v`.
+> Tem também um terceiro fluxo, [`jeito-3.json`](jeito-3.json), com um roteiro novo que não passa
+> por este documento — o roteiro dele está em [roteiro-jeito-3.md](roteiro-jeito-3.md).
 
 ## Abertura
 

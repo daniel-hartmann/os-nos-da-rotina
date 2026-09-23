@@ -73,7 +73,7 @@ def test_real_inputs_load(name):
     assert game.persistent_vars() == ["nome"]
 
 
-@pytest.mark.parametrize("name", ["jeito-1.json", "jeito-2.json"])
+@pytest.mark.parametrize("name", ["jeito-1.json", "jeito-2.json", "jeito-3.json"])
 def test_real_games_finish_in_auto_mode(tmp_path, name):
     script = build(tmp_path, ROOT / name)
     for seed in range(1, 30):
@@ -81,6 +81,21 @@ def test_real_games_finish_in_auto_mode(tmp_path, name):
         assert r.returncode == 0, r.stderr
         assert "— Fim —" in r.stdout
         assert "[erro]" not in r.stderr
+
+
+def test_jeito3_loads():
+    # jeito-3 não veio do Miro (roteiro novo, escrito à mão): sem painéis, sem pergunta de nome
+    # (o protagonista já tem nome, "Jorge"), e o prólogo fica fora do laço de reinício do dia.
+    game = load(ROOT / "jeito-3.json")
+    assert game.persistent_vars() == []
+    assert not game.panels
+    assert any(e.back for n in game.nodes.values() for e in n.succ), "esperava laços de volta ao início do dia"
+    prologo = game.nodes[game.start]
+    assert "Jorge" in prologo.narrative
+    for n in game.nodes.values():
+        for e in n.succ:
+            if e.back:
+                assert game.nodes[e.target].label == "NA EMPRESA", "o prólogo devia ficar fora do laço"
 
 
 def test_conditional_branch_and_quoting(tmp_path):

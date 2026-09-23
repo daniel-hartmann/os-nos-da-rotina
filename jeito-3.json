@@ -1,0 +1,936 @@
+{
+  "schema": "narrative-flow/v1",
+  "source": {
+    "tool": "hand-authored",
+    "board": null,
+    "note": "Roteiro novo do colega (3 ou 4 interações); não veio do Miro, então não tem posições reais — as coordenadas aqui são só pra ordenar os menus."
+  },
+  "game_title": "Os Nós da Rotina",
+  "title": "Jeito 3: roteiro novo (3 ou 4 pontos de interação, um só personagem)",
+  "nodes": [
+    {
+      "id": "j3n01",
+      "type": "process",
+      "text": "PRÓLOGO",
+      "x": 0,
+      "y": 0,
+      "narrative": "Você é Jorge e recentemente começou o emprego como motorista de ônibus na sua cidade. Seu trabalho é monótono, porém muito importante. Os horários precisam ser cumpridos à risca, pois muitas pessoas dependem da sua pontualidade. Na sua casa, você vai dormir cedo porque sabe que terá um longo dia pela frente amanhã."
+    },
+    {
+      "id": "j3n02",
+      "type": "process",
+      "text": "Chegada na empresa",
+      "x": 0,
+      "y": 100,
+      "narrative": "",
+      "art": "empresa"
+    },
+    {
+      "id": "j3n03",
+      "type": "process",
+      "text": "Garagem da empresa",
+      "x": 0,
+      "y": 200,
+      "narrative": "",
+      "art": "garagem",
+      "page": "new"
+    },
+    {
+      "id": "j3n04",
+      "type": "process",
+      "text": "NA EMPRESA",
+      "x": 0,
+      "y": 300,
+      "narrative": "Na manhã do dia seguinte, após o tradicional café da manhã de pão com ovo e muito café preto, Jorge chega na garagem da empresa para entrar no ônibus e iniciar mais um dia de trabalho.",
+      "page": "same"
+    },
+    {
+      "id": "j3n05",
+      "type": "process",
+      "text": "DENTRO DO ONIBUS",
+      "x": 0,
+      "y": 400,
+      "narrative": "DENTRO DO ONIBUS\n\nEnquanto você vai saindo da garagem, uma memória do seu curso lhe vem à cabeça.",
+      "art": "onibus"
+    },
+    {
+      "id": "lb05",
+      "type": "process",
+      "text": "Lembrança B (Curso e Pessoa Atraente)",
+      "x": 6273,
+      "y": -1657,
+      "narrative": "ESCRITÓRIO DA EMPRESA DE ÔNIBUS, CURSO PREPARATÓRIO",
+      "set": {
+        "memoria": "B"
+      }
+    },
+    {
+      "id": "lb08",
+      "type": "process",
+      "text": "Introdução LB",
+      "x": 6273,
+      "y": -1453,
+      "narrative": "Você lembra de uma pessoa atraente que conheceu na capacitação profissional da empresa de transportes Viação Rapidão. Vocês estavam juntos em um curso, quando você percebeu ela te olhando.",
+      "page": "same"
+    },
+    {
+      "id": "lb11",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 6273,
+      "y": -1205
+    },
+    {
+      "id": "lb16",
+      "type": "process",
+      "text": "Oi simpático",
+      "x": 6113,
+      "y": -979,
+      "choice": "Dar um oi simpático.",
+      "narrative": ""
+    },
+    {
+      "id": "lb17",
+      "type": "process",
+      "text": "Cantada",
+      "x": 6273,
+      "y": -979,
+      "choice": "Dar uma cantada.",
+      "narrative": ""
+    },
+    {
+      "id": "lb18",
+      "type": "process",
+      "text": "Indiferença",
+      "x": 6433,
+      "y": -979,
+      "choice": "Finge indiferença e presta atenção na aula.",
+      "narrative": ""
+    },
+    {
+      "id": "lb23",
+      "type": "process",
+      "text": "Senta comigo?",
+      "x": 5961,
+      "y": -777,
+      "narrative": "A pessoa atraente te chama pra sentar do lado dela."
+    },
+    {
+      "id": "lb24",
+      "type": "process",
+      "text": "PA fica puta",
+      "x": 6273,
+      "y": -777,
+      "narrative": "Daniela fica puta e faz escândalo na sala de aula."
+    },
+    {
+      "id": "lb25",
+      "type": "process",
+      "text": "Presta atenção no curso e não dá bola",
+      "x": 6585,
+      "y": -777,
+      "narrative": "Você completa o curso"
+    },
+    {
+      "id": "lb32",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 5961,
+      "y": -575
+    },
+    {
+      "id": "lb33",
+      "type": "decision",
+      "text": "Decisão",
+      "x": 6273,
+      "y": -575
+    },
+    {
+      "id": "lb34",
+      "type": "process",
+      "text": "Bora",
+      "x": 5801,
+      "y": -395,
+      "choice": "Aceitar.",
+      "narrative": ""
+    },
+    {
+      "id": "lb35",
+      "type": "process",
+      "text": "Prestar atenção na aula",
+      "x": 5961,
+      "y": -395,
+      "choice": "Prestar atenção na aula. Eu falo com ela depois.",
+      "narrative": ""
+    },
+    {
+      "id": "lb36",
+      "type": "process",
+      "text": "Pede desculpa",
+      "x": 6193,
+      "y": -395,
+      "choice": "Pedir desculpa e voltar a prestar atenção na aula",
+      "narrative": ""
+    },
+    {
+      "id": "lb37",
+      "type": "process",
+      "text": "A culpa é sua",
+      "x": 6353,
+      "y": -395,
+      "choice": "Fazer um escândalo e dizer que é culpa dela que deu moral.",
+      "narrative": ""
+    },
+    {
+      "id": "lb41",
+      "type": "process",
+      "text": "Conversa aula inteira",
+      "x": 5801,
+      "y": -215,
+      "narrative": "Você e a pessoa atraente começam a conversar por horas a fio. Vocês descobrem que têm muito em comum um com o outro. É amor à primeira vista."
+    },
+    {
+      "id": "lb42",
+      "type": "process",
+      "text": "Perde de vista, presta atenção",
+      "x": 5961,
+      "y": -215,
+      "narrative": "Você presta atenção no curso para evitar agitar a aula, e quando percebe, Daniela saiu da sala. Você a perde de vista."
+    },
+    {
+      "id": "lb43",
+      "type": "process",
+      "text": "Presta atenção na aula",
+      "x": 6193,
+      "y": -215,
+      "narrative": "Você fica mal visto com a pessoa atraente e termina o curso."
+    },
+    {
+      "id": "lb44",
+      "type": "process",
+      "text": "É expulso da sala de aula",
+      "x": 6353,
+      "y": -215,
+      "narrative": "Você é expulso do curso."
+    },
+    {
+      "id": "lb52",
+      "type": "process",
+      "text": "Não sabe usar elevador, tem atração LBA: 0 LBB: 1",
+      "x": 6033,
+      "y": 138,
+      "narrative": "",
+      "set": {
+        "elevador": "nao",
+        "atracao": "sim"
+      }
+    },
+    {
+      "id": "lb53",
+      "type": "process",
+      "text": "Sabe usar elevador, tem atração LBA: 1 LBB: 0",
+      "x": 6193,
+      "y": 138,
+      "narrative": "",
+      "set": {
+        "elevador": "sim",
+        "atracao": "sim"
+      }
+    },
+    {
+      "id": "lb54",
+      "type": "process",
+      "text": "Não sabe usar elevador, não tem atração LBA: 0 LBB: 0",
+      "x": 6353,
+      "y": 138,
+      "narrative": "",
+      "set": {
+        "elevador": "nao",
+        "atracao": "nao"
+      }
+    },
+    {
+      "id": "lb55",
+      "type": "process",
+      "text": "Sabe usar elevador, não tem atração LBA: 1 LBB: 0",
+      "x": 6513,
+      "y": 138,
+      "narrative": "",
+      "set": {
+        "elevador": "sim",
+        "atracao": "nao"
+      }
+    },
+    {
+      "id": "lb57",
+      "type": "process",
+      "text": "Fim Lembrança B",
+      "x": 6273,
+      "y": 343,
+      "narrative": ""
+    },
+    {
+      "id": "j3n06",
+      "type": "process",
+      "text": "Parada 1",
+      "x": 0,
+      "y": 1400,
+      "narrative": "PARADA 1 — Pessoas aleatórias entram no ônibus."
+    },
+    {
+      "id": "j3n07",
+      "type": "decision",
+      "text": "Parada 2: chegada",
+      "x": 0,
+      "y": 1500,
+      "narrative": "PARADA 2 — A pessoa atraente entra no ônibus."
+    },
+    {
+      "id": "j3n08",
+      "type": "process",
+      "text": "Y entra (com atração)",
+      "x": 0,
+      "y": 1600,
+      "narrative": "Você percebe a pessoa atraente entrando no ônibus. Uma visão alegre para o seu dia. Ela parece mais linda do que da outra vez que vocês se viram. Ela esbanja um lindo sorriso, claramente muito feliz em lhe ver.",
+      "page": "same"
+    },
+    {
+      "id": "j3n09",
+      "type": "process",
+      "text": "Sorrir de volta",
+      "x": 0,
+      "y": 1700,
+      "narrative": "Ela senta pertinho de você.",
+      "choice": "Sorrir de volta para ela.",
+      "set": {
+        "assento": "perto"
+      }
+    },
+    {
+      "id": "j3n10",
+      "type": "process",
+      "text": "Fingir indiferença",
+      "x": 300,
+      "y": 1700,
+      "narrative": "Ela senta no meio do ônibus para não incomodar.",
+      "choice": "Fingir indiferença. Estou em horário de trabalho e não posso perder tempo.",
+      "set": {
+        "assento": "meio"
+      }
+    },
+    {
+      "id": "j3n11",
+      "type": "process",
+      "text": "Y entra (sem atração)",
+      "x": 600,
+      "y": 1600,
+      "narrative": "Você percebe a pessoa atraente entrando no ônibus. Ela nota você e imediatamente faz cara de desprezo, e vocês dois instantaneamente se lembram que tudo poderia ter sido diferente se você não tivesse sido um babaca da última vez que vocês se viram. Ela passa por você vagarosamente, quase como se esperasse que você dissesse algo.",
+      "page": "same"
+    },
+    {
+      "id": "j3n12",
+      "type": "process",
+      "text": "Foi mal",
+      "x": 600,
+      "y": 1700,
+      "narrative": "Ela acha escroto igual, mas senta no meio do ônibus.",
+      "choice": "Foi mal pela outra vez. Eu estava nervoso.",
+      "set": {
+        "assento": "meio"
+      }
+    },
+    {
+      "id": "j3n13",
+      "type": "process",
+      "text": "Tá olhando o quê?",
+      "x": 900,
+      "y": 1700,
+      "narrative": "Ela fica furiosa e vai para o fundo do ônibus.",
+      "choice": "Tá olhando o quê?",
+      "set": {
+        "assento": "fundo"
+      }
+    },
+    {
+      "id": "j3n14",
+      "type": "process",
+      "text": "Dizer nada",
+      "x": 1200,
+      "y": 1700,
+      "narrative": "Ela vai para o fundo do ônibus.",
+      "choice": "Dizer nada.",
+      "set": {
+        "assento": "fundo"
+      }
+    },
+    {
+      "id": "j3n15",
+      "type": "decision",
+      "text": "Parada 3: gatilho",
+      "x": 0,
+      "y": 1800,
+      "narrative": "PARADA 3 — Pessoas aleatórias entram no ônibus. Um homem entra sem pagar pela porta de trás, no fundo do ônibus, e você não vê."
+    },
+    {
+      "id": "j3n16",
+      "type": "process",
+      "text": "Incidente com Y",
+      "x": 0,
+      "y": 1900,
+      "narrative": "Visivelmente frustrado, você não percebe que alguém entrou pela porta traseira do ônibus, e está ali incomodando os passageiros. Você nota, através do seu espelho, que a pessoa atraente está sendo incomodada por essa pessoa.",
+      "page": "same"
+    },
+    {
+      "id": "j3n17",
+      "type": "decision",
+      "text": "Parada 4: gatilho",
+      "x": 600,
+      "y": 1800,
+      "narrative": "PARADA 4 — Um cadeirante espera para entrar no ônibus."
+    },
+    {
+      "id": "j3n18",
+      "type": "process",
+      "text": "Parar o ônibus",
+      "x": 0,
+      "y": 2000,
+      "narrative": "A pessoa atraente agradece e vai sentar no meio do ônibus.",
+      "choice": "Parar o ônibus. Vou tirar esse cara daqui.",
+      "set": {
+        "assento": "meio"
+      }
+    },
+    {
+      "id": "j3n19",
+      "type": "process",
+      "text": "Final Trágico 1",
+      "x": 300,
+      "y": 2100,
+      "narrative": "A pessoa atraente tomou uma medida drástica ao se defender de um homem maníaco. Infelizmente isso inutiliza o ônibus completamente, e traumatiza uma velhinha que assistiu toda a situação. Todos estão bem, mas você precisa levar o ônibus de volta para a garagem."
+    },
+    {
+      "id": "j3n20",
+      "type": "process",
+      "text": "Fazer nada",
+      "x": 300,
+      "y": 2000,
+      "narrative": "",
+      "choice": "Fazer nada. Ela que se vire."
+    },
+    {
+      "id": "j3n21",
+      "type": "process",
+      "text": "Cadeirante (sabe operar)",
+      "x": 600,
+      "y": 1900,
+      "narrative": "Você enxerga que na próxima parada tem um cadeirante esperando para entrar no ônibus. Você prestou atenção no treinamento, mas sabe que isso vai custar um pouco de tempo no dia de seus passageiros.",
+      "page": "same"
+    },
+    {
+      "id": "j3n22",
+      "type": "process",
+      "text": "Cadeirante (não sabe operar)",
+      "x": 1200,
+      "y": 1900,
+      "narrative": "Você enxerga que na próxima parada tem um cadeirante esperando para entrar no ônibus. Uma gota de suor frio pinga da sua testa, porque você claramente não sabe operar o elevador do ônibus. Isso estava no curso de formação em algum momento?",
+      "page": "same"
+    },
+    {
+      "id": "j3n23",
+      "type": "process",
+      "text": "Parada 5",
+      "x": 600,
+      "y": 2600,
+      "narrative": "PARADA 5 — Mais pessoas aleatórias entram no ônibus."
+    },
+    {
+      "id": "j3n24",
+      "type": "process",
+      "text": "Final Feliz 1",
+      "x": 300,
+      "y": 2700,
+      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. A pessoa atraente faz questão de deixar o zap dela anotado em um pedaço de papel no bolso da sua jaqueta. Ela lhe dá uma piscadinha e pede que você mande mensagem pra ela. Hoje foi um bom dia."
+    },
+    {
+      "id": "j3n25",
+      "type": "process",
+      "text": "Final Feliz 2",
+      "x": 600,
+      "y": 2700,
+      "narrative": "Pouco a pouco, os passageiros começam a descer do ônibus em seus destinos. A pessoa atraente desce do ônibus te dando um olhar pesado. Acho que vocês dois podem concordar que as coisas poderiam ter sido diferentes em outros momentos."
+    },
+    {
+      "id": "j3n26",
+      "type": "process",
+      "text": "Final Trágico 3",
+      "x": 900,
+      "y": 2700,
+      "narrative": "O peso do julgamento dos passageiros sobre a sua inaptidão no seu trabalho pesa cada vez mais alto na sua consciência. Você frequentemente checa no espelho para ver se a pessoa atraente dá a mínima para você, mas você acaba perdendo a atenção e não percebe um sinal vermelho. O ônibus encosta no carro da frente, causando um pequeno dano. Todos os passageiros são liberados, e você precisa levar o carro de volta para a garagem."
+    },
+    {
+      "id": "j3n27",
+      "type": "decision",
+      "text": "Parada 5: resultado",
+      "x": 600,
+      "y": 2650
+    },
+    {
+      "id": "j3n28",
+      "type": "process",
+      "text": "Final Trágico 2",
+      "x": 1500,
+      "y": 2200,
+      "narrative": "Você recebe uma ligação da empresa no comunicador do ônibus. O seu chefe está furioso! Como assim você ignorou uma parada com cadeirante? Que espécie de motorista você é? Você é ordenado a fechar a linha e retornar imediatamente para a garagem. E é bom que isso não se repita amanhã! — Diz o chefe."
+    },
+    {
+      "id": "j3n29",
+      "type": "process",
+      "text": "Parar e operar",
+      "x": 600,
+      "y": 2000,
+      "narrative": "",
+      "choice": "Parar o ônibus e operar o elevador."
+    },
+    {
+      "id": "j3n30",
+      "type": "decision",
+      "text": "Resultado: operou",
+      "x": 600,
+      "y": 2100
+    },
+    {
+      "id": "j3n31",
+      "type": "process",
+      "text": "Passageiros compreendem (com atração)",
+      "x": 600,
+      "y": 2200,
+      "narrative": "Os passageiros compreendem, e a pessoa atraente fica ainda mais apaixonada por você.",
+      "set": {
+        "ajudou_cadeirante": "sim"
+      }
+    },
+    {
+      "id": "j3n32",
+      "type": "process",
+      "text": "Passageiros compreendem",
+      "x": 900,
+      "y": 2200,
+      "narrative": "Os passageiros compreendem.",
+      "set": {
+        "ajudou_cadeirante": "sim"
+      }
+    },
+    {
+      "id": "j3n33",
+      "type": "process",
+      "text": "Tentar operar",
+      "x": 1200,
+      "y": 2000,
+      "narrative": "Você demora 15 minutos para subir o cadeirante, e machuca sua mão no processo.",
+      "choice": "Tentar operar o elevador de qualquer forma.",
+      "set": {
+        "ajudou_cadeirante": "nao"
+      }
+    },
+    {
+      "id": "j3n34",
+      "type": "process",
+      "text": "Ignorar (sabe)",
+      "x": 900,
+      "y": 2000,
+      "narrative": "",
+      "choice": "Ignorar a parada do cadeirante."
+    },
+    {
+      "id": "j3n35",
+      "type": "process",
+      "text": "Ignorar (não sabe)",
+      "x": 1500,
+      "y": 2000,
+      "narrative": "",
+      "choice": "Ignorar a parada do cadeirante."
+    },
+    {
+      "id": "j3n36",
+      "type": "decision",
+      "text": "Resultado: ignorou",
+      "x": 1200,
+      "y": 2100
+    },
+    {
+      "id": "j3n37",
+      "type": "process",
+      "text": "Passageiros reclamam",
+      "x": 1200,
+      "y": 2200,
+      "narrative": "Os passageiros reclamam da injustiça com o cadeirante.",
+      "set": {
+        "ajudou_cadeirante": "nao"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "j3n01",
+      "to": "j3n02"
+    },
+    {
+      "from": "j3n02",
+      "to": "j3n03"
+    },
+    {
+      "from": "j3n03",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n04",
+      "to": "j3n05"
+    },
+    {
+      "from": "j3n05",
+      "to": "lb05"
+    },
+    {
+      "from": "lb55",
+      "to": "lb57"
+    },
+    {
+      "from": "lb54",
+      "to": "lb57"
+    },
+    {
+      "from": "lb53",
+      "to": "lb57"
+    },
+    {
+      "from": "lb52",
+      "to": "lb57"
+    },
+    {
+      "from": "lb25",
+      "to": "lb55"
+    },
+    {
+      "from": "lb44",
+      "to": "lb54"
+    },
+    {
+      "from": "lb43",
+      "to": "lb55"
+    },
+    {
+      "from": "lb37",
+      "to": "lb44"
+    },
+    {
+      "from": "lb36",
+      "to": "lb43"
+    },
+    {
+      "from": "lb33",
+      "to": "lb37"
+    },
+    {
+      "from": "lb33",
+      "to": "lb36"
+    },
+    {
+      "from": "lb24",
+      "to": "lb33"
+    },
+    {
+      "from": "lb42",
+      "to": "lb53"
+    },
+    {
+      "from": "lb41",
+      "to": "lb52"
+    },
+    {
+      "from": "lb35",
+      "to": "lb42"
+    },
+    {
+      "from": "lb34",
+      "to": "lb41"
+    },
+    {
+      "from": "lb32",
+      "to": "lb35"
+    },
+    {
+      "from": "lb32",
+      "to": "lb34"
+    },
+    {
+      "from": "lb23",
+      "to": "lb32"
+    },
+    {
+      "from": "lb18",
+      "to": "lb25"
+    },
+    {
+      "from": "lb17",
+      "to": "lb24"
+    },
+    {
+      "from": "lb16",
+      "to": "lb23"
+    },
+    {
+      "from": "lb11",
+      "to": "lb18"
+    },
+    {
+      "from": "lb11",
+      "to": "lb16"
+    },
+    {
+      "from": "lb11",
+      "to": "lb17"
+    },
+    {
+      "from": "lb08",
+      "to": "lb11"
+    },
+    {
+      "from": "lb05",
+      "to": "lb08"
+    },
+    {
+      "from": "lb57",
+      "to": "j3n06"
+    },
+    {
+      "from": "j3n06",
+      "to": "j3n07"
+    },
+    {
+      "from": "j3n07",
+      "to": "j3n08",
+      "when": {
+        "atracao": "sim"
+      }
+    },
+    {
+      "from": "j3n08",
+      "to": "j3n09"
+    },
+    {
+      "from": "j3n08",
+      "to": "j3n10"
+    },
+    {
+      "from": "j3n07",
+      "to": "j3n11",
+      "when": {
+        "atracao": "nao"
+      }
+    },
+    {
+      "from": "j3n11",
+      "to": "j3n12"
+    },
+    {
+      "from": "j3n11",
+      "to": "j3n13"
+    },
+    {
+      "from": "j3n11",
+      "to": "j3n14"
+    },
+    {
+      "from": "j3n09",
+      "to": "j3n15"
+    },
+    {
+      "from": "j3n10",
+      "to": "j3n15"
+    },
+    {
+      "from": "j3n12",
+      "to": "j3n15"
+    },
+    {
+      "from": "j3n13",
+      "to": "j3n15"
+    },
+    {
+      "from": "j3n14",
+      "to": "j3n15"
+    },
+    {
+      "from": "j3n15",
+      "to": "j3n16",
+      "when": {
+        "assento": "fundo"
+      }
+    },
+    {
+      "from": "j3n15",
+      "to": "j3n17"
+    },
+    {
+      "from": "j3n16",
+      "to": "j3n18"
+    },
+    {
+      "from": "j3n18",
+      "to": "j3n17"
+    },
+    {
+      "from": "j3n16",
+      "to": "j3n20"
+    },
+    {
+      "from": "j3n20",
+      "to": "j3n19"
+    },
+    {
+      "from": "j3n19",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n17",
+      "to": "j3n21",
+      "when": {
+        "elevador": "sim"
+      }
+    },
+    {
+      "from": "j3n17",
+      "to": "j3n22",
+      "when": {
+        "elevador": "nao"
+      }
+    },
+    {
+      "from": "j3n24",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n25",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n26",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n23",
+      "to": "j3n27"
+    },
+    {
+      "from": "j3n27",
+      "to": "j3n24",
+      "when": {
+        "atracao": "sim",
+        "ajudou_cadeirante": "sim"
+      }
+    },
+    {
+      "from": "j3n27",
+      "to": "j3n25",
+      "when": {
+        "atracao": "nao",
+        "ajudou_cadeirante": "sim"
+      }
+    },
+    {
+      "from": "j3n27",
+      "to": "j3n26",
+      "when": {
+        "ajudou_cadeirante": "nao"
+      }
+    },
+    {
+      "from": "j3n28",
+      "to": "j3n04"
+    },
+    {
+      "from": "j3n21",
+      "to": "j3n29"
+    },
+    {
+      "from": "j3n29",
+      "to": "j3n30"
+    },
+    {
+      "from": "j3n30",
+      "to": "j3n31",
+      "when": {
+        "atracao": "sim"
+      }
+    },
+    {
+      "from": "j3n31",
+      "to": "j3n23"
+    },
+    {
+      "from": "j3n30",
+      "to": "j3n32"
+    },
+    {
+      "from": "j3n32",
+      "to": "j3n23"
+    },
+    {
+      "from": "j3n22",
+      "to": "j3n33"
+    },
+    {
+      "from": "j3n33",
+      "to": "j3n23"
+    },
+    {
+      "from": "j3n21",
+      "to": "j3n34"
+    },
+    {
+      "from": "j3n22",
+      "to": "j3n35"
+    },
+    {
+      "from": "j3n34",
+      "to": "j3n36"
+    },
+    {
+      "from": "j3n35",
+      "to": "j3n36"
+    },
+    {
+      "from": "j3n36",
+      "to": "j3n28",
+      "when": {
+        "atracao": "nao"
+      }
+    },
+    {
+      "from": "j3n36",
+      "to": "j3n37"
+    },
+    {
+      "from": "j3n37",
+      "to": "j3n23"
+    }
+  ],
+  "notes": [],
+  "unmapped_notes": [
+    {
+      "fonte": "roteiro novo, Parada 4 (cadeirante) opção Ignorar",
+      "texto": "'Ignorar a parada do cadeirante (...e se LBB = 0, você é denunciado... = Final trágico 2)'",
+      "situacao": "O texto só diz o que acontece se ela NÃO gosta de você (denúncia). Se ela gosta de você (atracao=sim) e você ignora o cadeirante mesmo assim, o roteiro não diz o que acontece — assumi que o jogo simplesmente segue para a Parada 5 (sem final imediato), com ajudou_cadeirante=nao."
+    },
+    {
+      "fonte": "roteiro novo, Parada 5 (tabela de finais)",
+      "texto": "Só define final pra 3 combinações: (atração+ajudou), (sem atração+ajudou), (sem atração+não ajudou)",
+      "situacao": "Falta a 4ª combinação (atração=sim, não ajudou o cadeirante). Assumi que cai no mesmo Final Trágico 3 (o texto dele não depende de atração), mas isso é um chute meu, não algo que o roteiro diz."
+    },
+    {
+      "fonte": "roteiro novo, Parada 2 e nome da pessoa atraente",
+      "texto": "'PARADA 2 - Carla entra no ônibus.' ... depois sempre chamada de 'Y'",
+      "situacao": "'Carla' só aparece uma vez, no título da parada, e o resto do texto usa 'Y' — tratei os dois como o mesmo placeholder e troquei por 'a pessoa atraente' em todo o texto jogável, igual já tinha sido feito com 'Daniela' antes. Se vocês quiserem dar um nome de verdade pra ela, é só me dizer e eu troco em todo canto (inclusive no jeito-1/jeito-2)."
+    }
+  ]
+}
