@@ -117,6 +117,9 @@ nomes digitados nunca viram HTML. Parâmetros úteis na URL: `?seed=7`, `?auto=1
 push em `main`. Configuração única: Settings > Pages > Source: **GitHub Actions**. O workflow fica na
 raiz deste projeto, então ele só roda se `trabalho-01` for a raiz do repositório.
 
+No site publicado, cada `jeito-N.json` vira uma URL curta `NN.html`/`NN.sh` (`jeito-1.json` →
+`01.html`), em vez do nome do arquivo de entrada — só no site; `dist/` continua usando `jeito-N`.
+
 ## Windows (.bat): pendente
 
 `gamegen/targets/bat.py` gera um `.bat` que embute um motor em PowerShell (`runtime/engine.ps1`).
