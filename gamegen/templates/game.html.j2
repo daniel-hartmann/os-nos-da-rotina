@@ -12,6 +12,11 @@
     --glow: 232, 176, 74; /* --accent em r,g,b, pra usar com alpha em box-shadow/rgba() */
     --vignette: rgba(0, 0, 0, .55);
     --ease: cubic-bezier(.22, .8, .32, 1);
+    /* máquina de escrever do texto narrado: o JS lê essas três pra saber quando o texto termina
+       de aparecer (e só então soltar os botões de ação) — uma fonte só pros dois lados. */
+    --type-speed: 14ms;
+    --type-cap: 260;
+    --type-dur: 180ms;
   }
   @media (prefers-color-scheme: light) {
     :root {
@@ -74,6 +79,19 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* texto narrado: cada letra aparece na sua vez, feito máquina de escrever. Só o efeito visual —
+     o texto inteiro já está no DOM desde o começo, então leitor de tela e busca no navegador
+     enxergam a frase completa na hora, sem esperar a animação. */
+  p.type .ch {
+    opacity: 0;
+    animation-name: reveal-ch;
+    animation-duration: var(--type-dur);
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-delay: calc(min(var(--i), var(--type-cap)) * var(--type-speed));
+  }
+  @keyframes reveal-ch { to { opacity: 1; } }
+
   .menu { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .55rem; }
   button, input {
     font: inherit; color: inherit; background: var(--card);
@@ -119,7 +137,7 @@
   noscript { display: block; padding: 2rem 1rem; text-align: center; }
 
   @media (prefers-reduced-motion: reduce) {
-    #screen > *, button.continue { animation: none !important; }
+    #screen > *, button.continue, p.type .ch { animation: none !important; opacity: 1 !important; }
     button, input { transition: none !important; }
   }
 </style>
@@ -165,8 +183,26 @@
     });
   }
 
+  // Quanto as ações (menu, "Continuar", o campo de nome, "Recomeçar?") esperam: até o texto
+  // narrado na tela terminar de aparecer letra por letra, mais uma pausa fixa depois disso —
+  // pra não competir com a leitura nem saltar em cima do texto ainda se revelando.
+  var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var typeCss = getComputedStyle(document.documentElement);
+  var TYPE_SPEED = parseFloat(typeCss.getPropertyValue("--type-speed")) || 14;
+  var TYPE_CAP = parseFloat(typeCss.getPropertyValue("--type-cap")) || 260;
+  var TYPE_DUR = parseFloat(typeCss.getPropertyValue("--type-dur")) || 180;
+  var ACTION_DELAY_MS = 1000;
+  var charIndex = 0; // zera a cada "clear"; conta as letras já reveladas na página atual
+  var textDoneAt = 0; // performance.now() de quando o texto na tela termina de aparecer
+
+  function waitForTextReveal() {
+    if (reduceMotion) return Promise.resolve(); // sem animação, não tem por que esperar
+    var wait = Math.max(0, textDoneAt - performance.now()) + ACTION_DELAY_MS;
+    return new Promise(function (resolve) { setTimeout(resolve, wait); });
+  }
+
   var ui = {
-    clear: function () { screen.replaceChildren(); window.scrollTo(0, 0); },
+    clear: function () { screen.replaceChildren(); window.scrollTo(0, 0); charIndex = 0; textDoneAt = 0; },
     banner: function (t) { screen.append(el("h1", "title", t)); },
     art: function (t) {
       var pre = el("pre", "art", t);
@@ -175,7 +211,29 @@
       screen.append(pre);
     },
     text: function (t) {
-      t.split(/\n{2,}/).forEach(function (para) { screen.append(el("p", "", para)); });
+      // cada parágrafo vira um <p class="type"> com uma letra por <span>, pra CSS revelar em
+      // sequência (efeito de máquina de escrever). O texto completo já fica no DOM: é só visual.
+      // O índice da letra continua contando entre parágrafos e entre chamadas na mesma página
+      // (só zera quando a tela limpa), pra textos em sequência não "datilografarem" por cima um
+      // do outro; é ele também que diz quando a página termina de aparecer (textDoneAt).
+      t.split(/\n{2,}/).forEach(function (para) {
+        var p = el("p", "type");
+        para.split("\n").forEach(function (line, li) {
+          if (li > 0) p.append(document.createElement("br"));
+          for (var ch of line) {
+            var s = document.createElement("span");
+            s.className = "ch";
+            s.style.setProperty("--i", charIndex++);
+            s.textContent = ch;
+            p.append(s);
+          }
+        });
+        screen.append(p);
+      });
+      if (charIndex > 0) {
+        var finishInMs = Math.min(charIndex - 1, TYPE_CAP) * TYPE_SPEED + TYPE_DUR;
+        textDoneAt = Math.max(textDoneAt, performance.now() + finishInMs);
+      }
     },
     pending: function (label, draft) {
       var p = el("p", "pending", "[texto pendente] " + label);
@@ -191,7 +249,8 @@
       screen.append(el("p", "info", prompt + "  →  " + labels[idx]));
     },
     autoAsk: function (prompt, ans) { screen.append(el("p", "info", prompt + "  →  " + ans)); },
-    end: function () {
+    end: async function () {
+      await waitForTextReveal();
       screen.append(el("p", "end", "— Fim —"));
       var b = el("button", "continue", "Jogar de novo");
       b.addEventListener("click", function () { location.reload(); });
@@ -199,7 +258,8 @@
       reveal(b);
     },
 
-    waitContinue: function () {
+    waitContinue: async function () {
+      await waitForTextReveal();
       return interaction(function (done) {
         var b = el("button", "continue", "Continuar ▸");
         screen.append(b);
@@ -212,9 +272,10 @@
       });
     },
 
-    menu: function (prompt, labels) {
+    menu: async function (prompt, labels) {
       // Sem a pergunta e sem numerar visivelmente: as falas continuam a cena, não viram
       // questionário. 1-9 ainda escolhem pelo teclado (fica só a dica no rodapé).
+      await waitForTextReveal();
       return interaction(function (done) {
         var wrap = el("div", "menu");
         var buttons = labels.map(function (label, i) {
@@ -238,7 +299,8 @@
       });
     },
 
-    ask: function (prompt, def) {
+    ask: async function (prompt, def) {
+      await waitForTextReveal();
       return interaction(function (done) {
         var row = el("div", "row");
         var input = el("input");
@@ -260,7 +322,8 @@
       });
     },
 
-    confirmRestart: function () {
+    confirmRestart: async function () {
+      await waitForTextReveal();
       return interaction(function (done) {
         screen.append(el("p", "prompt", "Recomeçar?"));
         var row = el("div", "row");
